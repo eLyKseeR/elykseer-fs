@@ -9,12 +9,13 @@ stdenv.mkDerivation rec {
     nativeBuildInputs = [
         cmake
         git
+        mono5
+        fsharp
     ];
 
     buildInputs = [
         openssl
         zlib
-        #boost
     ];
 
 }

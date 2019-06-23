@@ -48,31 +48,31 @@
   <Import Project="$(MSBuildExtensionsPath32)/../Microsoft SDKs/F#/4.0/Framework/v4.0/Microsoft.FSharp.Targets" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="../tests/fsharp/TestAssembly.fs" />
-    <Compile Include="../tests/fsharp/TestKey128.fs" />
-    <Compile Include="../tests/fsharp/TestKey256.fs" />
-    <Compile Include="../tests/fsharp/TestSha256.fs" />
-    <Compile Include="../tests/fsharp/TestRandom.fs" />
-    <Compile Include="../tests/fsharp/TestRandList.fs" />
-    <Compile Include="../tests/fsharp/TestFileCtrl.fs">
+    <Compile Include="tests/TestAssembly.fs" />
+    <Compile Include="tests/TestKey128.fs" />
+    <Compile Include="tests/TestKey256.fs" />
+    <Compile Include="tests/TestSha256.fs" />
+    <Compile Include="tests/TestRandom.fs" />
+    <Compile Include="tests/TestRandList.fs" />
+    <Compile Include="tests/TestFileCtrl.fs">
       <Link>TestFileCtrl.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestAes.fs">
+    <Compile Include="tests/TestAes.fs">
       <Link>TestAes.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestDb.fs">
+    <Compile Include="tests/TestDb.fs">
       <Link>TestDb.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestBackupCtrl.fs">
+    <Compile Include="tests/TestBackupCtrl.fs">
       <Link>TestBackupCtrl.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestRestoreCtrl.fs">
+    <Compile Include="tests/TestRestoreCtrl.fs">
       <Link>TestRestoreCtrl.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestLiz.fs">
+    <Compile Include="tests/TestLiz.fs">
       <Link>TestLiz.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestLogging.fs">
+    <Compile Include="tests/TestLogging.fs">
       <Link>TestLogging.fs</Link>
     </Compile>
     <None Include="packages.config" />
@@ -84,7 +84,7 @@
       <Link>sharpPRNG.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <ProjectReference Include="../eLyKseeR-base.OSX.fsproj">
+    <ProjectReference Include="../base/eLyKseeR-base.OSX.fsproj">
       <Project>{F0AE1EB0-9463-45A4-9E38-8D8033A0B850}</Project>
       <Name>eLyKseeR-base.OSX</Name>
     </ProjectReference>

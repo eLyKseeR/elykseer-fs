@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "eLyKseeR-base.Win32", "eLyKseeR-base.Win32.fsproj", "{F0AE1EB0-9463-45A4-9E38-8D8033A0B850}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UT.Win32", "UT\UT.Win32.fsproj", "{D547F087-1E39-4DAB-A470-69BF78020D9D}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UT.Win32", "..\UT\UT.Win32.fsproj", "{D547F087-1E39-4DAB-A470-69BF78020D9D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "eLyKseeR-native.Win32", "eLyKseeR-native.Win32.fsproj", "{2519BB55-8701-4FEF-B1A4-DEC05DA1C7C5}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "eLyKseeR-native.Win32", "..\native\eLyKseeR-native.Win32.fsproj", "{2519BB55-8701-4FEF-B1A4-DEC05DA1C7C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

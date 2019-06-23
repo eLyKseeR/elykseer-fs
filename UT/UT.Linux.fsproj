@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\base\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\base\packages\NUnit.3.12.0\build\NUnit.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -11,11 +12,13 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
     <OutputPath>bin/Debug</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>false</Optimize>
     <OutputPath>bin/Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <Externalconsole>true</Externalconsole>
@@ -26,10 +29,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
     <Reference Include="FSharp.Core">
-      <HintPath>../packages/FSharp.Core.3.1.2.5/lib/net40/FSharp.Core.dll</HintPath>
+      <HintPath>..\base\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unquote">
-      <HintPath>../packages/Unquote.3.1.2/lib/net45/Unquote.dll</HintPath>
+      <HintPath>..\base\packages\Unquote.4.0.0\lib\net45\Unquote.dll</HintPath>
     </Reference>
     <Reference Include="ManagedOpenSsl">
       <HintPath>../../openssl-net_development/bin/Debug/ManagedOpenSsl.dll</HintPath>
@@ -46,53 +49,44 @@
     <Reference Include="nunit-console-runner, Version=2.6.4.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <Package>nunit</Package>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <Package>nunit</Package>
-    </Reference>
     <Reference Include="nunit.core.interfaces, Version=2.6.4.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <Package>nunit</Package>
     </Reference>
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="../tests/fsharp/TestAssembly.fs" />
-    <Compile Include="../tests/fsharp/TestKey128.fs" />
-    <Compile Include="../tests/fsharp/TestKey256.fs" />
-    <Compile Include="../tests/fsharp/TestSha256.fs" />
-    <Compile Include="../tests/fsharp/TestRandom.fs" />
-    <Compile Include="../tests/fsharp/TestRandList.fs" />
-    <Compile Include="../tests/fsharp/TestFileCtrl.fs">
-      <Link>TestFileCtrl.fs</Link>
-    </Compile>
-    <Compile Include="../tests/fsharp/TestAes.fs">
-      <Link>TestAes.fs</Link>
-    </Compile>
-    <Compile Include="../tests/fsharp/TestDb.fs">
-      <Link>TestDb.fs</Link>
-    </Compile>
-    <Compile Include="../tests/fsharp/TestBackupCtrl.fs">
-      <Link>TestBackupCtrl.fs</Link>
-    </Compile>
+    <Reference Include="nunit.framework">
+      <HintPath>..\base\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)/../Microsoft SDKs/F#/4.0/Framework/v4.0/Microsoft.FSharp.Targets" />
   <ItemGroup>
-    <ProjectReference Include="../eLyKseeR-base.Linux.fsproj">
-      <Project>{F0AE1EB0-9463-45A4-9E38-8D8033A0B850}</Project>
-      <Name>eLyKseeR-base.Linux</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="../tests/fsharp/TestRestoreCtrl.fs">
+    <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="tests/TestAssembly.fs" />
+    <Compile Include="tests/TestKey128.fs" />
+    <Compile Include="tests/TestKey256.fs" />
+    <Compile Include="tests/TestSha256.fs" />
+    <Compile Include="tests/TestRandom.fs" />
+    <Compile Include="tests/TestRandList.fs" />
+    <Compile Include="tests/TestFileCtrl.fs">
+      <Link>TestFileCtrl.fs</Link>
+    </Compile>
+    <Compile Include="tests/TestAes.fs">
+      <Link>TestAes.fs</Link>
+    </Compile>
+    <Compile Include="tests/TestDb.fs">
+      <Link>TestDb.fs</Link>
+    </Compile>
+    <Compile Include="tests/TestBackupCtrl.fs">
+      <Link>TestBackupCtrl.fs</Link>
+    </Compile>
+    <Compile Include="tests/TestRestoreCtrl.fs">
       <Link>TestRestoreCtrl.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestLiz.fs">
+    <Compile Include="tests/TestLiz.fs">
       <Link>TestLiz.fs</Link>
     </Compile>
-    <Compile Include="../tests/fsharp/TestLogging.fs">
+    <Compile Include="tests/TestLogging.fs">
       <Link>TestLogging.fs</Link>
     </Compile>
-    <None Include="packages.config" />
     <None Include="../../sharpPRNG_development/libprngCpp.linux.1.0.4.so">
       <Link>libprngCpp.linux.1.0.4.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -101,5 +95,10 @@
       <Link>sharpPRNG.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <ProjectReference Include="../base/eLyKseeR-base.Linux.fsproj">
+      <Project>{F0AE1EB0-9463-45A4-9E38-8D8033A0B850}</Project>
+      <Name>eLyKseeR-base.Linux</Name>
+    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

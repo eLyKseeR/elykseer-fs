@@ -30,13 +30,13 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="ManagedOpenSsl">
-      <HintPath>..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll</HintPath>
+      <HintPath>..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll</HintPath>
     </Reference>
     <Reference Include="eLyKseeR">
-      <HintPath>..\..\elykseer-base_development\bin\Debug\eLyKseeR.dll</HintPath>
+      <HintPath>..\..\..\elykseer-base_development\bin\Debug\eLyKseeR.dll</HintPath>
     </Reference>
     <Reference Include="eLyKseeR-native.Mono">
-      <HintPath>..\..\elykseer-base_development\bin\Debug\eLyKseeR-native.Mono.dll</HintPath>
+      <HintPath>..\..\..\elykseer-base_development\bin\Debug\eLyKseeR-native.Mono.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="FSharp.Core">
@@ -53,7 +53,7 @@
       <HintPath>..\packages\Xwt.Gtk.Mac.0.2.100\lib\net40\Xwt.Gtk.Mac.dll</HintPath>
     </Reference>
     <Reference Include="sharpPRNG">
-      <HintPath>..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
+      <HintPath>..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Mac">
       <HintPath>..\..\..\..\..\..\Library\Frameworks\Xamarin.Mac.framework\Versions\4.0.0.214\lib\x86_64\full\Xamarin.Mac.dll</HintPath>
@@ -85,39 +85,39 @@
     <Compile Include="ThisApplication.fs" />
     <Compile Include="Main.fs" />
     <None Include="packages.config" />
-    <None Include="..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll.config">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll.config">
       <Link>ManagedOpenSsl.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libcrypto.linux.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.linux.1.0.2.so">
       <Link>libcrypto.linux.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libssl.linux.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.linux.1.0.2.so">
       <Link>libssl.linux.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libcrypto.freebsd.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.freebsd.1.0.2.so">
       <Link>libcrypto.freebsd.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libssl.freebsd.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.freebsd.1.0.2.so">
       <Link>libssl.freebsd.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libcrypto.osx.1.0.2.dylib">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.osx.1.0.2.dylib">
       <Link>libcrypto.osx.1.0.2.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libssl.osx.1.0.2.dylib">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.osx.1.0.2.dylib">
       <Link>libssl.osx.1.0.2.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\sharpPRNG_development\libprngCpp.osx.1.0.4.dylib">
+    <None Include="..\..\..\sharpPRNG_development\libprngCpp.osx.1.0.4.dylib">
       <Link>libprngCpp.osx.1.0.4.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll.config">
+    <None Include="..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll.config">
       <Link>sharpPRNG.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
