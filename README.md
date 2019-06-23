@@ -1,26 +1,26 @@
-# elykseer-base
+# elykseer-fs
 
-[![](https://www.elykseer.com/images/elykseer.png)](https://codiepp.github.io/elykseer-base/)
-
-cryptographic data archive; written in F#; envisaged to stay another 10 years
-
-read more [here ..](https://codiepp.github.io/elykseer-base/)
+This version of eLyKseeR builds on the PoC that was done in 2007 using F#: https://github.com/CodiePP/elykseer-base
+Also included with this codebase are [command line utils](https://github.com/CodiePP/elykseer-cli)
+and an experimental [GUI](https://github.com/CodiePP/elykseer-gui).
 
 
 ## hacking
 
 the preferred way to inspect/hack/program eLyKseeR is via [nix-shell](https://nixos.org).
 
+> `nix-shell`
 
 ## compilation
 
 ### key for signing
 
-before compilation, prepare a new RSA key for signing the assembly:
+before compilation, prepare new RSA keys for signing assemblies:
 
 > ``sn -k eLyKseeR.snk``
+> ``sn -k eLyKseeR-native.snk``
+> ``sn -k UT/ut.snk``
 
-(the linker will then expect the key in the file "eLyKseeR.snk")
 
 ### IDE support
 
@@ -29,47 +29,15 @@ before compilation, prepare a new RSA key for signing the assembly:
 or open the [VisualStudio solution](eLyKseeR-base.Win32.sln) on Windows.
 
 
-## references
+## requirements
 
-[managed OpenSSL](https://github.com/openssl-net/openssl-net)
+### [managed OpenSSL](https://github.com/openssl-net/openssl-net)
 
-[sharpPRNG](https://github.com/CodiePP/prngsharp) install from [nuget](https://www.nuget.org/packages/sharpPRNG) or compile from submodule.
+extract source code in the parent directory: ../openssl-net_development 
+and build it.
 
-install in path ./packages:
+### [sharpPRNG](https://github.com/CodiePP/prngsharp)
 
-> ``nuget install sharpPRNG``
-
-
-## C++ native code
-
-We are migrating the code to C++. Some external utilities are require to be installed in the directory 'ext/', see the README.
-
-* [Gitalk](https://github.com/CodiePP/gitalk.git) to extract code from the literate source files.
-* [SizeBounded](https://github.com/CodiePP/sizebounded.git) provides secure buffers bounded by their size
-
-Preparation: add a symbolic link from cpp/src/ to cpp/src/lxr, so that the include files are found.
-
-The code is extracted and assembled with the following script:
-
-```
-cd cpp
-./mk_cpp.sh
-```
-
-Then, the CMakeLists.txt files will find the source and produce a Makefile which drives the compilation.
-
-```
-cd ..
-mkdir BUILD
-cd BUILD
-cmake ..
-make -j 4
-```
-
-
-## partners
-
-[ ![](http://www.sbclab.com/img/sbclsml.png)](http://www.sbclab.com)
-
-[ ![](http://www.icadia.ch/img/ICADIA_Shape_Text.png)](http://www.icadia.ch)
-
+extract source code in the parent directory: ../sharpPRNG_development
+and build it. Also, run `mk_Linux.sh` to create the native library. For other
+platforms call the appropriate script.
