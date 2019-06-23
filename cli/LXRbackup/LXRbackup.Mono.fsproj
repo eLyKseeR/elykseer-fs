@@ -12,6 +12,7 @@
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <Externalconsole>true</Externalconsole>
     <AssemblyName>LXRbackup</AssemblyName>
@@ -28,9 +29,13 @@
     <AssemblyOriginatorKeyFile>LXRbackup.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants></DefineConstants>
     <AssemblyName>LXRbackup.Mono</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>LXRbackup.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -46,16 +51,16 @@
       <HintPath>..\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
     <Reference Include="ManagedOpenSsl">
-      <HintPath>..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll</HintPath>
+      <HintPath>..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll</HintPath>
     </Reference>
     <Reference Include="eLyKseeR">
-      <HintPath>..\..\elykseer-base_development\bin\Debug\eLyKseeR.dll</HintPath>
+      <HintPath>..\..\..\elykseer-base_development\bin\Debug\eLyKseeR.dll</HintPath>
     </Reference>
     <Reference Include="sharpPRNG">
-      <HintPath>..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
+      <HintPath>..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="eLyKseeR-native.Mono">
-      <HintPath>..\..\elykseer-base_development\bin\Debug\eLyKseeR-native.Mono.dll</HintPath>
+      <HintPath>..\..\native\bin\Debug\eLyKseeR-native.Mono.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -71,43 +76,43 @@
     <Compile Include="Backup.fs" />
     <Compile Include="Program.fs" />
     <None Include="packages.config" />
-    <None Include="..\..\elykseer-base_development\bin\Debug\eLyKseeR-native.dll.config">
+    <None Include="..\..\native\bin\Debug\eLyKseeR-native.dll.config">
       <Link>eLyKseeR-native.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll.config">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll.config">
       <Link>ManagedOpenSsl.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libcrypto.linux.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.linux.1.0.2.so">
       <Link>libcrypto.linux.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libssl.linux.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.linux.1.0.2.so">
       <Link>libssl.linux.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libcrypto.freebsd.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.freebsd.1.0.2.so">
       <Link>libcrypto.freebsd.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libssl.freebsd.1.0.2.so">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.freebsd.1.0.2.so">
       <Link>libssl.freebsd.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libcrypto.osx.1.0.2.dylib">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.osx.1.0.2.dylib">
       <Link>libcrypto.osx.1.0.2.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\openssl-net_development\bin\Debug\libssl.osx.1.0.2.dylib">
+    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.osx.1.0.2.dylib">
       <Link>libssl.osx.1.0.2.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\sharpPRNG_development\libprngCpp.linux.1.0.4.so">
+    <None Include="..\..\..\sharpPRNG_development\libprngCpp.linux.1.0.4.so">
       <Link>libprngCpp.linux.1.0.4.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll.config">
+    <None Include="..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll.config">
       <Link>sharpPRNG.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
