@@ -31,7 +31,8 @@
     <Reference Include="System.Numerics" />
     <Reference Include="Mono.Posix" />
     <Reference Include="FSharp.Core">
-      <HintPath>packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
+      <HintPath>..\base\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)/../Microsoft SDKs/F#/4.0/Framework/v4.0/Microsoft.FSharp.Targets" />
