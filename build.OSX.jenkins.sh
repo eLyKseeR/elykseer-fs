@@ -19,3 +19,15 @@ mono packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe UT/bin/Debug/U
 
 # NUnit test results in: TestResult.xml
 
+sn -k cli/LXRbackup/LXRbackup.snk
+sn -k cli/LXRrestore/LXRrestore.snk
+
+xbuild /t:clean /p:Configuration="Debug" /p:Platform="${PLATFRM}" cli/elykseer-cli.Mono.sln
+xbuild /p:Configuration="Debug" /p:Platform="${PLATFRM}" cli/elykseer-cli.Mono.sln
+
+sn -k gui/LXRbackup/LXRbackup.snk
+sn -k gui/LXRrestore/LXRrestore.snk
+
+xbuild /t:clean /p:Configuration="Debug" /p:Platform="${PLATFRM}" gui/LXR_GUIs.OSX.sln
+xbuild /p:Configuration="Debug" /p:Platform="${PLATFRM}" gui/LXR_GUIs.OSX.sln
+
