@@ -1,0 +1,19 @@
+
+language: fsharp
+mono:
+  - latest
+
+solution: solution-name.sln
+install:
+  - nuget restore -PackagesDirectory packages packages.config
+  - nuget restore -PackagesDirectory packages UT/packages.config
+script:
+  - sn -k base/eLyKseeR.snk
+  - sn -k native/eLyKseeR-native.snk
+  - sn -k UT/ut.snk
+
+  - msbuild /t:clean /p:Configuration="Debug" /p:Platform="Any CPU" base/eLyKseeR-base.Linux.sln
+  - msbuild /p:Configuration="Debug" /p:Platform="Any CPU" base/eLyKseeR-base.Linux.sln
+
+  - mono packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe UT/bin/Debug/UT.exe
+
