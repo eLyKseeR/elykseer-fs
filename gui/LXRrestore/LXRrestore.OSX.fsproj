@@ -16,6 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
@@ -32,31 +33,30 @@
     <Reference Include="ManagedOpenSsl">
       <HintPath>..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll</HintPath>
     </Reference>
-    <Reference Include="eLyKseeR">
-      <HintPath>..\..\..\elykseer-base_development\bin\Debug\eLyKseeR.dll</HintPath>
-    </Reference>
-    <Reference Include="eLyKseeR-native.Mono">
-      <HintPath>..\..\..\elykseer-base_development\bin\Debug\eLyKseeR-native.Mono.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.3.4\lib\net45\FSharp.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Xwt">
-      <HintPath>..\packages\Xwt.0.2.100\lib\net40\Xwt.dll</HintPath>
-    </Reference>
-    <Reference Include="Xwt.Gtk">
-      <HintPath>..\packages\Xwt.Gtk.0.2.100\lib\net40\Xwt.Gtk.dll</HintPath>
-    </Reference>
-    <Reference Include="Xwt.Gtk.Mac">
-      <HintPath>..\packages\Xwt.Gtk.Mac.0.2.100\lib\net40\Xwt.Gtk.Mac.dll</HintPath>
-    </Reference>
     <Reference Include="sharpPRNG">
       <HintPath>..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
+    <Reference Include="Xwt">
+      <HintPath>..\..\..\xwt_development\Xwt\bin\Debug\Xwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.Gtk">
+      <HintPath>..\..\..\xwt_development\Xwt.Gtk\bin\Debug\Xwt.Gtk.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.Gtk.Mac">
+      <HintPath>..\..\..\xwt_development\Xwt.Gtk.Mac\bin\Debug\Xwt.Gtk.Mac.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Mac">
-      <HintPath>..\..\..\..\..\..\Library\Frameworks\Xamarin.Mac.framework\Versions\4.0.0.214\lib\x86_64\full\Xamarin.Mac.dll</HintPath>
+      <HintPath>..\..\..\xwt_development\Xwt.Gtk.Mac\bin\Debug\Xamarin.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="eLyKseeR-native.Mono">
+      <HintPath>..\..\base\bin\Debug\eLyKseeR-native.Mono.dll</HintPath>
+    </Reference>
+    <Reference Include="eLyKseeR">
+      <HintPath>..\..\base\bin\Debug\eLyKseeR.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core">
+      <HintPath>..\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
