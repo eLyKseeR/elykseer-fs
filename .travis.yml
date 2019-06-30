@@ -3,6 +3,10 @@ language: fsharp
 mono:
   - latest
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y nuget
+
 solution: base/eLyKseeR-base.Linux.sln
 install:
   - nuget restore -PackagesDirectory packages packages.config
