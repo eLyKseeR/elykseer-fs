@@ -3,7 +3,7 @@ language: fsharp
 mono:
   - latest
 
-solution: solution-name.sln
+solution: base/eLyKseeR-base.Linux.sln
 install:
   - nuget restore -PackagesDirectory packages packages.config
   - nuget restore -PackagesDirectory packages UT/packages.config
