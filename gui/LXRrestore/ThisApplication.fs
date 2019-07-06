@@ -1,4 +1,23 @@
-﻿namespace LXRrestore
+﻿(*
+    eLyKseeR or LXR - cryptographic data archiving software
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*)
+
+namespace LXRrestore
 
 module ThisApplication = 
     open System
@@ -53,14 +72,14 @@ module ThisApplication =
 
     // the controller
     let ctrl = 
-        SBCLab.LXR.RestoreCtrl.create ()
+        eLyKseeR.RestoreCtrl.create ()
 
 
     let parseFpXml fn =
-        if SBCLab.LXR.FileCtrl.fileExists fn then
+        if eLyKseeR.FileCtrl.fileExists fn then
             use str = new IO.FileStream(fn, IO.FileMode.Open)
-            let db = SBCLab.LXR.RestoreCtrl.getDbFp ctrl
-            //SBCLab.LXR.DbFp.inStream db (new StreamReader(str))
+            let db = eLyKseeR.RestoreCtrl.getDbFp ctrl
+            //eLyKseeR.DbFp.inStream db (new StreamReader(str))
             db.inStream (new StreamReader(str))
             Console.WriteLine("know of {0} filepaths in db", db.idb.count)
             dta.Clear()
@@ -81,9 +100,9 @@ module ThisApplication =
         ()
 
     let parseKeysXml fn = 
-        if SBCLab.LXR.FileCtrl.fileExists fn then
+        if eLyKseeR.FileCtrl.fileExists fn then
             use str = new IO.FileStream(fn, IO.FileMode.Open)
-            let db = SBCLab.LXR.RestoreCtrl.getDbKeys ctrl
+            let db = eLyKseeR.RestoreCtrl.getDbKeys ctrl
             db.inStream (new StreamReader(str))
             Console.WriteLine("know of {0} keys in db", db.idb.count)
             stage.Trigger(3)
@@ -102,8 +121,8 @@ module ThisApplication =
         ()
 
     let validate (e : EventArgs) =
-        let dbfp = SBCLab.LXR.RestoreCtrl.getDbFp ctrl
-        let dbkey = SBCLab.LXR.RestoreCtrl.getDbKeys ctrl
+        let dbfp = eLyKseeR.RestoreCtrl.getDbFp ctrl
+        let dbkey = eLyKseeR.RestoreCtrl.getDbKeys ctrl
         let mutable hasall = true
         let mutable count = 0
         let mutable blen = 0
@@ -114,12 +133,12 @@ module ThisApplication =
             let hasall', count', blen', clen' = 
                 match dat0 with
                     | None -> (false, count, blen, clen)
-                    | Some dat -> (List.forall (fun (b : SBCLab.LXR.DbFpBlock) ->
-                                      let said = SBCLab.LXR.Key256.toHex b.aid
+                    | Some dat -> (List.forall (fun (b : eLyKseeR.DbFpBlock) ->
+                                      let said = eLyKseeR.Key256.toHex b.aid
                                       Option.isSome (dbkey.idb.get said))
                                       dat.blocks, 
-                                   count + 1, blen + (List.fold (fun s (e:SBCLab.LXR.DbFpBlock) -> s + e.blen) 0 dat.blocks),
-                                   clen + (List.fold (fun s (e:SBCLab.LXR.DbFpBlock)-> s + e.clen) 0 dat.blocks)
+                                   count + 1, blen + (List.fold (fun s (e:eLyKseeR.DbFpBlock) -> s + e.blen) 0 dat.blocks),
+                                   clen + (List.fold (fun s (e:eLyKseeR.DbFpBlock)-> s + e.clen) 0 dat.blocks)
                                   )
             hasall <- hasall && hasall'
             count <- count'
@@ -152,12 +171,12 @@ module ThisApplication =
         //    Console.WriteLine("  @ {0} = {1}", i, dta.GetValue(i-1, df1))
 
         try        
-            let o = new SBCLab.LXR.Options()
+            let o = new eLyKseeR.Options()
             o.setNchunks 256
             o.setRedundancy 0
             o.setFpathChunks !inputdir
             //o.setFpathDb ""  //dbdir
-            SBCLab.LXR.RestoreCtrl.setOptions ctrl  o
+            eLyKseeR.RestoreCtrl.setOptions ctrl  o
 
             let count = dta.RowCount
             let i = ref 0
@@ -165,12 +184,12 @@ module ThisApplication =
                 Application.Invoke(fun _ -> progress.Trigger( double !i / double count ))
                 //System.Threading.Thread.Sleep(200)
                 let fp = dta.GetValue(!i, df1)
-                SBCLab.LXR.RestoreCtrl.restore ctrl !outputdir fp
+                eLyKseeR.RestoreCtrl.restore ctrl !outputdir fp
                 i := !i + 1
         with
-          | SBCLab.LXR.RestoreCtrl.BadAccess -> Application.Invoke(fun _ -> msgerr.Trigger("Cannot extract files;\nmaybe already some files in the target directory?"))
-          | SBCLab.LXR.RestoreCtrl.NoKey -> Application.Invoke(fun _ -> msgerr.Trigger("Some encryption key is not present;\ncannot decrypt and extract some files."))
-          | SBCLab.LXR.RestoreCtrl.ReadFailed m -> Application.Invoke(fun _ -> msgerr.Trigger("Extraction failed: " + m))
+          | eLyKseeR.RestoreCtrl.BadAccess -> Application.Invoke(fun _ -> msgerr.Trigger("Cannot extract files;\nmaybe already some files in the target directory?"))
+          | eLyKseeR.RestoreCtrl.NoKey -> Application.Invoke(fun _ -> msgerr.Trigger("Some encryption key is not present;\ncannot decrypt and extract some files."))
+          | eLyKseeR.RestoreCtrl.ReadFailed m -> Application.Invoke(fun _ -> msgerr.Trigger("Extraction failed: " + m))
           | e -> Application.Invoke(fun _ -> msgerr.Trigger(e.ToString()))
 
         // end work and return to initial stage
