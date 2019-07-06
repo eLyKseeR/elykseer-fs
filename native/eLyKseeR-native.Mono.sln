@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "eLyKseeR-native.Mono", "eLyKseeR-native.Mono.fsproj", "{D51E9EDD-64FB-45EA-8FC5-13F2B91A5E24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D51E9EDD-64FB-45EA-8FC5-13F2B91A5E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D51E9EDD-64FB-45EA-8FC5-13F2B91A5E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D51E9EDD-64FB-45EA-8FC5-13F2B91A5E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D51E9EDD-64FB-45EA-8FC5-13F2B91A5E24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

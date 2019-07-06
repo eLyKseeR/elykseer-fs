@@ -1,4 +1,23 @@
-﻿namespace LXRbackup
+﻿(*
+    eLyKseeR or LXR - cryptographic data archiving software
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*)
+
+namespace LXRbackup
 
 module ThisApplication = 
     open System
@@ -38,7 +57,7 @@ module ThisApplication =
 
     let addFile fn = 
         // must be a file
-        if SBCLab.LXR.FileCtrl.fileExists fn then
+        if eLyKseeR.FileCtrl.fileExists fn then
             let fi = new FileInfo(fn)
             if fi.Attributes.HasFlag(FileAttributes.Normal) then
                 filepath.Trigger("F::" + fn)
@@ -49,10 +68,10 @@ module ThisApplication =
         ()
 
     let addDir1 fn = 
-        SBCLab.LXR.Logging.log () <| Printf.sprintf "addDir1 %A" fn
+        eLyKseeR.Logging.log () <| Printf.sprintf "addDir1 %A" fn
         // must be a directory
         // only first depth files are added
-        if SBCLab.LXR.FileCtrl.dirExists fn then
+        if eLyKseeR.FileCtrl.dirExists fn then
             let dirinfo = new DirectoryInfo(fn) in
             if dirinfo.Attributes.HasFlag(FileAttributes.ReparsePoint)
                 || dirinfo.Attributes.HasFlag(FileAttributes.System) then
@@ -66,10 +85,10 @@ module ThisApplication =
         ()
 
     let rec addDir fn = 
-        SBCLab.LXR.Logging.log () <| Printf.sprintf "addDir %A" fn
+        eLyKseeR.Logging.log () <| Printf.sprintf "addDir %A" fn
         // must be a directory
         // recursively add all files
-        if SBCLab.LXR.FileCtrl.dirExists fn then
+        if eLyKseeR.FileCtrl.dirExists fn then
             try
                 let dirinfo = new DirectoryInfo(fn) in
                 if dirinfo.Attributes.HasFlag(FileAttributes.ReparsePoint)
@@ -292,14 +311,14 @@ module ThisApplication =
         stage.Trigger(4)
         // the controller
         let ctrl = 
-            let o = new SBCLab.LXR.Options()
+            let o = new eLyKseeR.Options()
             o.setNchunks optN
             o.setCompression (1 = optComp)
             o.setDeduplication optDedup
             o.setRedundancy optRed
             o.setFpathChunks optOutP
             o.setFpathDb optDatP
-            SBCLab.LXR.BackupCtrl.create o
+            eLyKseeR.BackupCtrl.create o
 
         // helper
         let dobackup fp =
@@ -308,7 +327,7 @@ module ThisApplication =
                || fi.Attributes.HasFlag(FileAttributes.System) then
                 Console.WriteLine("skipping: {0}", fp)
             else
-                SBCLab.LXR.BackupCtrl.backup ctrl fp
+                eLyKseeR.BackupCtrl.backup ctrl fp
             ()
         // do heavy work
         Console.WriteLine("we have {0} filepaths to backup.", dta.RowCount)
@@ -324,14 +343,14 @@ module ThisApplication =
                 //Console.WriteLine("  @ {0} = {1}", i, fp)
                 dobackup fp
 
-        SBCLab.LXR.BackupCtrl.finalize ctrl
+        eLyKseeR.BackupCtrl.finalize ctrl
 
         let m = String.Format("we have transferred {0} bytes in and {1} bytes out\nit took {2}ms for encryption {3}ms to read and {4}ms to write",
-                        SBCLab.LXR.BackupCtrl.bytes_in ctrl,
-                        SBCLab.LXR.BackupCtrl.bytes_out ctrl,
-                        SBCLab.LXR.BackupCtrl.time_encrypt ctrl,
-                        SBCLab.LXR.BackupCtrl.time_extract ctrl,
-                        SBCLab.LXR.BackupCtrl.time_write ctrl)
+                        eLyKseeR.BackupCtrl.bytes_in ctrl,
+                        eLyKseeR.BackupCtrl.bytes_out ctrl,
+                        eLyKseeR.BackupCtrl.time_encrypt ctrl,
+                        eLyKseeR.BackupCtrl.time_extract ctrl,
+                        eLyKseeR.BackupCtrl.time_write ctrl)
         MessageDialog.ShowMessage("Backup complete", m)
 
         // end work and return to initial stage
@@ -361,7 +380,7 @@ module ThisApplication =
             System.IO.DriveInfo.GetDrives() |>
                 Seq.iteri (fun i (drv: DriveInfo) -> 
                                let r = FshButton.createWithHandler drv.Name
-                                             (fun b e -> if SBCLab.LXR.FileCtrl.dirExists drv.RootDirectory.FullName then
+                                             (fun b e -> if eLyKseeR.FileCtrl.dirExists drv.RootDirectory.FullName then
                                                             optDatP <- drv.RootDirectory.FullName
                                                             //Application.Invoke(fun _ ->  stage.Trigger(4))
                                              )
@@ -544,7 +563,7 @@ module ThisApplication =
         reached_stage.Add(fun i -> if i = 1 then
                                       // select path
                                       btncont.Visible <- false
-                                      te.Changed.Add(fun t -> if SBCLab.LXR.FileCtrl.dirExists te.Text then
+                                      te.Changed.Add(fun t -> if eLyKseeR.FileCtrl.dirExists te.Text then
                                                                  btncont.Visible <- true
                                                               else
                                                                  btncont.Visible <- false

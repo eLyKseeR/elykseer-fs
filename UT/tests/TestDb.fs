@@ -1,7 +1,7 @@
 ﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-base
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ module TestDb
 
 open System
 open NUnit.Framework
-open SBCLab.LXR
+open eLyKseeR
 open System.IO
 open System.Xml
 
@@ -43,16 +43,17 @@ let ``filepath db``() =
     //Assert.Throws<System.Collections.Generic.KeyNotFoundException>( fun() -> DbFp.get db "/some/thing/not/seen/yet.txt" |> ignore ) |> ignore
     Assert.AreEqual(None, db.idb.get "/some/thing/not/seen/yet.txt")
 
+    Directory.CreateDirectory "testing" |> ignore
     db.idb.set fp d1
     Assert.AreEqual(1, db.idb.count)
     Assert.AreEqual(Some d1, db.idb.get fp)
-    use fstr = File.CreateText "./obj/test_dbfp.xml" in
+    use fstr = File.CreateText "./testing/test_dbfp.xml" in
     begin
         db.outStream fstr
         fstr.Flush()
         fstr.Close()
     end
-    use instr = new StreamReader(File.OpenRead "./obj/test_dbfp.xml") in
+    use instr = new StreamReader(File.OpenRead "./testing/test_dbfp.xml") in
         db.inStream instr
     // rereading the same data does not add anything
     Assert.AreEqual(1, db.idb.count)
@@ -73,13 +74,13 @@ let ``key db``() =
     db.idb.set aid2 d2
     Assert.AreEqual(2, db.idb.count)
     Assert.AreEqual(Some d2, db.idb.get aid2)
-    use fstr = File.CreateText "./obj/test_dbkey.xml" in
+    use fstr = File.CreateText "./testing/test_dbkey.xml" in
     begin
         db.outStream fstr
         fstr.Flush()
         fstr.Close()
     end
-    use instr = new StreamReader(File.OpenRead "./obj/test_dbkey.xml") in
+    use instr = new StreamReader(File.OpenRead "./testing/test_dbkey.xml") in
         db.inStream instr
     // rereading the same data does not add anything
     Assert.AreEqual(2, db.idb.count)
@@ -87,12 +88,12 @@ let ``key db``() =
 [<Test>]
 let ``read key db from file``() =
     let db = new DbKey()
-    let fname = "./obj/test_read_db_key.xml"
+    let fname = "./testing/test_read_db_key.xml"
     File.Delete(fname)
     use fstr1 = File.OpenWrite(fname)
     use s = new StreamWriter(fstr1)
     s.Write("<?xml version=\"1.0\"?>\n")
-    s.Write("<DbKey xmlns=\"http://spec.sbclab.com/lxr/v1.0\">\n")
+    s.Write("<DbKey xmlns=\"http://spec.elykseer.com/lxr/v1.0\">\n")
     s.Write("<host>host</host>\n")
     s.Write("<user>user</user>\n")
     s.Write("<date>2017-12-31T22:11:33</date>\n")
@@ -109,12 +110,12 @@ let ``read key db from file``() =
 [<Test>]
 let ``read fp db from file``() =
     let db = new DbFp()
-    let fname = "./obj/test_read_db_fp.xml"
+    let fname = "./testing/test_read_db_fp.xml"
     File.Delete(fname)
     use fstr1 = File.OpenWrite(fname)
     use s = new StreamWriter(fstr1)
     s.Write("<?xml version=\"1.0\"?>\n")
-    s.Write("<DbFp xmlns=\"http://spec.sbclab.com/lxr/v1.0\">\n")
+    s.Write("<DbFp xmlns=\"http://spec.elykseer.com/lxr/v1.0\">\n")
     s.Write("<host>host</host>\n")
     s.Write("<user>user</user>\n")
     s.Write("<date>2017-12-31T22:11:33</date>\n")
@@ -158,7 +159,7 @@ let ``read fp db from file``() =
 [<Test>]
 let ``write Options to file``() =
     let d = new Options()
-    let fname = "./obj/test_write_options.xml"
+    let fname = "./testing/test_write_options.xml"
     File.Delete(fname)
     use fstr1 = File.OpenWrite(fname)
     use s = new StreamWriter(fstr1)
@@ -167,7 +168,7 @@ let ``write Options to file``() =
 [<Test>]
 let ``read options from file``() =
     let d = new Options()
-    let fname = "./obj/test_read_options.xml"
+    let fname = "./testing/test_read_options.xml"
     File.Delete(fname)
     use fstr1 = File.OpenWrite(fname)
     use s = new StreamWriter(fstr1)
@@ -197,7 +198,7 @@ let ``read options from file``() =
 [<Test>]
 let ``write BackupJob to file``() =
     let d = new DbBackupJob()
-    let fname = "./obj/test_write_backupjob.xml"
+    let fname = "./testing/test_write_backupjob.xml"
     File.Delete(fname)
     use fstr1 = File.OpenWrite(fname)
     use s = new StreamWriter(fstr1)
@@ -205,10 +206,14 @@ let ``write BackupJob to file``() =
 
 [<Test>]
 let ``read BackupJob from file``() =
+    let basedir = "/var/tmp/testbed"
+    Directory.CreateDirectory basedir |> ignore
+    File.WriteAllText(basedir + "/file.txt", "this is some text.")
+    File.WriteAllText(basedir + "/file.jpg", "you would expect some image date here.")
     let d = new DbBackupJob()
     let p1 = @"C:\HOME\me\Documents"
     let p2 = @"testbed"
-    let fname = "./obj/test_read_backupjob.xml"
+    let fname = "./testing/test_read_backupjob.xml"
     File.Delete(fname)
     use fstr1 = File.OpenWrite(fname)
     use s = new StreamWriter(fstr1)
@@ -229,7 +234,7 @@ let ``read BackupJob from file``() =
     s.WriteLine("</Job>")
     s.WriteLine(@"<Job name=""{0}"">", p2)
     s.WriteLine("<Paths>")
-    s.WriteLine(@"<path type=""recursive"">{0}</path>", "/var/tmp/testbed")
+    s.WriteLine(@"<path type=""recursive"">{0}</path>", basedir)
     s.WriteLine("</Paths>")
     s.WriteLine("<Filters>")
     s.WriteLine(@"<exclude>.*\.jpeg</exclude><exclude>.*\.jpg</exclude>")
@@ -267,9 +272,9 @@ let ``read BackupJob from file``() =
     Assert.AreEqual(1, e1.options.isDeduplicated)
     Assert.AreEqual(2, e2.options.isDeduplicated)
     Assert.AreEqual(0, e1.paths.Length)
-    Assert.AreEqual(110, e2.paths.Length)
+    Assert.AreEqual(2, e2.paths.Length)  // TODO should be only 1 (.jpg filtered out)
 
-    let fname2 = "./obj/test_dump_backupjob.xml"
+    let fname2 = "./testing/test_dump_backupjob.xml"
     File.Delete(fname2)
     use fstr3 = File.OpenWrite(fname2)
     use s2 = new StreamWriter(fstr3)

@@ -1,7 +1,7 @@
-(*
+﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-base
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SBCLab.LXR
+namespace eLyKseeR
 
 open System
 
@@ -30,12 +30,12 @@ module Liz =
     exception Expired
 
     let version =
-        let b64 = "VmVyc2lvbiAxLjQuMC4xIFRSMyAtIGRvIG5vdCB1c2UgZm9yIHByb2R1Y3Rpb24="
+        let b64 = "VmVyc2lvbiAxLjUuMC4xIFRSNCAtIGRvIG5vdCB1c2UgZm9yIHByb2R1Y3Rpb24="
         in
         Text.Encoding.ASCII.GetString(Convert.FromBase64String(b64))
 
     let copyright =
-        let b64 = "Q29weXJpZ2h0IChjKSAyMDE3IEFsZXhhbmRlciBEaWVtYW5kCg=="
+        let b64 = "Q29weXJpZ2h0IChjKSAyMDE3LTIwMTkgQWxleGFuZGVyIERpZW1hbm=="
         in
         Text.Encoding.ASCII.GetString(Convert.FromBase64String(b64))
 
@@ -659,9 +659,9 @@ b2YgdGhpcyBMaWNlbnNlLiAgQnV0IGZpcnN0LCBwbGVhc2UgcmVhZAo8aHR0cDovL3d3dy5nbnUu\
 b3JnL3BoaWxvc29waHkvd2h5LW5vdC1sZ3BsLmh0bWw+Lgo=" in
         Text.Encoding.ASCII.GetString(Convert.FromBase64String(b64))
 
-        // echo -n "2018-05-31" | base64
+        // echo -n "2019-12-31" | base64
     let expiring = 
-        let b64 = "MjAxOC0wNS0zMQ=="
+        let b64 = "MjAxOS0xMi0zMQ=="
         let s = System.Text.Encoding.ASCII.GetString(System.Convert.FromBase64String(b64))
         DateTime.Parse(s)
 

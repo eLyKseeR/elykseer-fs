@@ -1,7 +1,7 @@
 ﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-cli
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ module Main =
         Console.WriteLine(n.Name + " " + n.Version.ToString())
         gonormal()
         gored()
-        Console.WriteLine(SBCLab.LXR.Liz.version)
+        Console.WriteLine(eLyKseeR.Liz.version)
         gonormal()
         Console.WriteLine()
 
@@ -80,15 +80,15 @@ module Main =
             exit(0)
 
         if Array.contains "--version" argv then
-            Console.WriteLine(SBCLab.LXR.Liz.version)
+            Console.WriteLine(eLyKseeR.Liz.version)
             exit(0)
 
         if Array.contains "--license" argv then
-            Console.WriteLine(SBCLab.LXR.Liz.license)
+            Console.WriteLine(eLyKseeR.Liz.license)
             exit(0)
 
         if Array.contains "--copyright" argv then
-            Console.WriteLine(SBCLab.LXR.Liz.copyright)
+            Console.WriteLine(eLyKseeR.Liz.copyright)
             exit(0)
 
         if Array.contains "-j" argv then
@@ -99,7 +99,7 @@ module Main =
                 exit(0)
             else
                 let fp = p.getValue |> List.head
-                let jdesc = new SBCLab.LXR.DbBackupJob ()
+                let jdesc = new eLyKseeR.DbBackupJob ()
                 (
                     use fstr = File.OpenRead(fp)
                     use instr = new StreamReader(fstr)
@@ -107,15 +107,15 @@ module Main =
                 )
                 let backup = new Backup()
                 //backup.runJob //name job
-                jdesc.idb.appValues (fun name (job: SBCLab.LXR.DbJobDat) ->
+                jdesc.idb.appValues (fun name (job: eLyKseeR.DbJobDat) ->
                     if job.options.isDeduplicated > 0 then
                         let fpath = new DirectoryInfo(job.options.fpath_db) in
-                        SBCLab.LXR.Logging.log () <| Printf.sprintf "reading dir %A" fpath 
+                        eLyKseeR.Logging.log () <| Printf.sprintf "reading dir %A" fpath 
                         let newest = fpath.EnumerateFiles("lxr*_dbfp.xml", SearchOption.TopDirectoryOnly)
                         let selected = newest |> Seq.map (fun fi -> (fi.LastWriteTime.Ticks, fi.FullName))
                                        |> Seq.sortByDescending (fun (dt, _) -> dt) |> Seq.take 1 |> Seq.toList
                         match selected with
-                        | [(_, el)] -> let db = new SBCLab.LXR.DbFp() in
+                        | [(_, el)] -> let db = new eLyKseeR.DbFp() in
                                        use str = File.OpenText(el)
                                        db.inStream str
                                        backup.setRefDbFp db
@@ -143,11 +143,11 @@ module Main =
                     | _ -> () )
                 [("-n",backup.setN);("-r",backup.setR);("-c",backup.setC);("-d",backup.setD);("-pD",backup.setDataPath);("-pX",backup.setChunkPath)]
 
-            let mutable refdbfp : SBCLab.LXR.DbFp option = None
-            let mutable refdbkey : SBCLab.LXR.DbKey option = None
+            let mutable refdbfp : eLyKseeR.DbFp option = None
+            let mutable refdbkey : eLyKseeR.DbKey option = None
 
             match List.tryFind (fun (p : Parameter) -> p.getName = "-ref" && p.isInit) ps with
-            | Some p -> try let db = new SBCLab.LXR.DbFp() in
+            | Some p -> try let db = new eLyKseeR.DbFp() in
                             //System.Console.WriteLine("reading paths as reference from {0}", p.getValue.Head)
                             use str = File.OpenText(p.getValue.Head)
                             db.inStream str

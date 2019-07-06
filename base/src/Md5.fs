@@ -1,7 +1,7 @@
-(*
+﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-base
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 
-namespace SBCLab.LXR
+namespace eLyKseeR
 
 module Md5 =
 

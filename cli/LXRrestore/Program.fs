@@ -1,7 +1,7 @@
 ﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-cli
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ module Main =
         Console.WriteLine(n.Name + " " + n.Version.ToString())
         gonormal()
         gored()
-        Console.WriteLine(SBCLab.LXR.Liz.version)
+        Console.WriteLine(eLyKseeR.Liz.version)
         gonormal()
         Console.WriteLine()
 
@@ -74,15 +74,15 @@ module Main =
             exit(0)
 
         if Array.contains "--version" argv then
-            Console.WriteLine(SBCLab.LXR.Liz.version)
+            Console.WriteLine(eLyKseeR.Liz.version)
             exit(0)
 
         if Array.contains "--license" argv then
-            Console.WriteLine(SBCLab.LXR.Liz.license)
+            Console.WriteLine(eLyKseeR.Liz.license)
             exit(0)
 
         if Array.contains "--copyright" argv then
-            Console.WriteLine(SBCLab.LXR.Liz.copyright)
+            Console.WriteLine(eLyKseeR.Liz.copyright)
             exit(0)
 
         let ps = List.collect (fun (name,req) -> [new Parameter(name,req)]) 

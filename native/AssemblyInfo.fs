@@ -12,10 +12,10 @@ open System.Runtime.InteropServices
 [<assembly:AssemblyConfiguration("")>]
 [<assembly:AssemblyCompany("")>]
 [<assembly:AssemblyProduct("LXR (native)")>]
-[<assembly:AssemblyCopyright("Copyright © 2017 Alexander Diemand")>]
+[<assembly:AssemblyCopyright("Copyright © 2017-2019 Alexander Diemand")>]
 [<assembly:AssemblyTrademark("")>]
-[<assembly:AssemblyVersion("1.4.0.1")>]
-[<assembly:AssemblyFileVersion("1.4.0.1")>]
+[<assembly:AssemblyVersion("1.5.0.1")>]
+[<assembly:AssemblyFileVersion("1.5.0.1")>]
 [<assembly:AssemblyCulture("")>]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

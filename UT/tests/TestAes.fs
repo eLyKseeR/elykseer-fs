@@ -1,7 +1,7 @@
 ﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-base
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 module TestAes
 
 open NUnit.Framework
-open SBCLab.LXR
+open eLyKseeR
 
 [<Test>]
 let ``can encrypt and decrypt``() =

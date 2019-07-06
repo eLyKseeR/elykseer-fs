@@ -8,9 +8,9 @@ open System.Runtime.CompilerServices
 [<assembly:AssemblyConfiguration("")>]
 [<assembly:AssemblyCompany("")>]
 [<assembly:AssemblyProduct("LXRbackup")>]
-[<assembly:AssemblyCopyright("Copyright © 2017 Alexander Diemand")>]
+[<assembly:AssemblyCopyright("Copyright © 2017-2019 Alexander Diemand")>]
 [<assembly:AssemblyTrademark("")>]
-[<assembly:AssemblyVersion("1.4.0.1")>]
+[<assembly:AssemblyVersion("1.5.0.1")>]
 ()
 // The assembly version has the format {Major}.{Minor}.{Build}.{Revision}
 //[<assembly: AssemblyDelaySign(false)>]

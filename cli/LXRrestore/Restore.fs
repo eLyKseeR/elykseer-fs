@@ -1,7 +1,7 @@
 ﻿(*
     eLyKseeR or LXR - cryptographic data archiving software
-    https://github.com/CodiePP/elykseer-cli
-    Copyright (C) 2017 Alexander Diemand
+    https://github.com/eLyKseeR/elykseer-fs
+    Copyright (C) 2017-2019 Alexander Diemand
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,23 +31,23 @@ type Restore () =
     let mutable r = 0
     let mutable pX = "/tmp/"
     let mutable pOut = "/tmp/"
-    let mutable ctrl = SBCLab.LXR.RestoreCtrl.create ()
+    let mutable ctrl = eLyKseeR.RestoreCtrl.create ()
     let mutable selexpr = []
     let mutable xclexpr = []
 
     let init () =
-        let o = new SBCLab.LXR.Options()
+        let o = new eLyKseeR.Options()
         o.setNchunks n
         o.setRedundancy r
         o.setFpathDb ""
         o.setFpathChunks pX
-        SBCLab.LXR.RestoreCtrl.setOptions ctrl o
+        eLyKseeR.RestoreCtrl.setOptions ctrl o
          
     let readfpdb fp =
         try
             (* read db file *)
             use str = new IO.FileStream(fp, IO.FileMode.Open)
-            let db = SBCLab.LXR.RestoreCtrl.getDbFp ctrl
+            let db = eLyKseeR.RestoreCtrl.getDbFp ctrl
             db.inStream (new StreamReader(str))
             Console.WriteLine("know of {0} filepaths in db", db.idb.count)
             with _ -> ()
@@ -56,7 +56,7 @@ type Restore () =
         try
             (* read db file *)
             use str = new IO.FileStream(fp, IO.FileMode.Open)
-            let db = SBCLab.LXR.RestoreCtrl.getDbKeys ctrl
+            let db = eLyKseeR.RestoreCtrl.getDbKeys ctrl
             db.inStream (new StreamReader(str))
             Console.WriteLine("know of {0} keys in db", db.idb.count)
             with _ -> ()
@@ -68,21 +68,21 @@ type Restore () =
 //#else
 //        let fpout = fp'
 //#endif
-        let fpout = SBCLab.LXR.native.FsUtils.cleanfp fp'
+        let fpout = eLyKseeR.native.FsUtils.cleanfp fp'
         Console.Write("restoring "); gocyan()
         Console.Write(fp' + "  "); gonormal()
-        try SBCLab.LXR.RestoreCtrl.restore ctrl pOut fp'
-            let dbfp = SBCLab.LXR.RestoreCtrl.getDbFp ctrl
+        try eLyKseeR.RestoreCtrl.restore ctrl pOut fp'
+            let dbfp = eLyKseeR.RestoreCtrl.getDbFp ctrl
             match dbfp.idb.get fp' with
             | None -> gored(); Console.WriteLine("no data"); gonormal()
             | Some db ->
-                let chk = SBCLab.LXR.Sha256.hash_file (pOut + "/" + fpout) |> SBCLab.LXR.Key256.toHex
-                if chk = SBCLab.LXR.Key256.toHex db.checksum then
+                let chk = eLyKseeR.Sha256.hash_file (pOut + "/" + fpout) |> eLyKseeR.Key256.toHex
+                if chk = eLyKseeR.Key256.toHex db.checksum then
                     gogreen()
                     Console.WriteLine("success."); gonormal()
                 else
                     gored()
-                    Console.WriteLine("failure " + chk + "/=" + (SBCLab.LXR.Key256.toHex db.checksum)); gonormal()
+                    Console.WriteLine("failure " + chk + "/=" + (eLyKseeR.Key256.toHex db.checksum)); gonormal()
         with
         | e -> gored(); Console.Write("failed"); gonormal()
                //Console.WriteLine(" with {0}", e.ToString())
@@ -105,7 +105,7 @@ type Restore () =
 
     member this.setOutputPath p =
         pOut <- p
-        if not <| SBCLab.LXR.FileCtrl.dirExists p then
+        if not <| eLyKseeR.FileCtrl.dirExists p then
             Directory.CreateDirectory(p) |> ignore
 
     member this.setSelectExpr (x : string) =
@@ -118,7 +118,7 @@ type Restore () =
 
 
     member this.addDb fp =
-        if SBCLab.LXR.FileCtrl.fileExists fp then
+        if eLyKseeR.FileCtrl.fileExists fp then
             readfpdb fp
             readkeydb fp
         ()
@@ -127,19 +127,19 @@ type Restore () =
         dorestore fp
 
     member this.restoreSelection () =
-        let db = SBCLab.LXR.RestoreCtrl.getDbFp ctrl
+        let db = eLyKseeR.RestoreCtrl.getDbFp ctrl
         // all paths are checked against regexps and eventually restored
         db.idb.appKeys (fun e -> checkRestore e)
 
     member this.summarize =
-        let td = SBCLab.LXR.RestoreCtrl.time_read ctrl +
-                 SBCLab.LXR.RestoreCtrl.time_decrypt ctrl +
-                 SBCLab.LXR.RestoreCtrl.time_extract ctrl
-        let bi = SBCLab.LXR.RestoreCtrl.bytes_in ctrl
-        let bo = SBCLab.LXR.RestoreCtrl.bytes_out ctrl
+        let td = eLyKseeR.RestoreCtrl.time_read ctrl +
+                 eLyKseeR.RestoreCtrl.time_decrypt ctrl +
+                 eLyKseeR.RestoreCtrl.time_extract ctrl
+        let bi = eLyKseeR.RestoreCtrl.bytes_in ctrl
+        let bo = eLyKseeR.RestoreCtrl.bytes_out ctrl
         Console.WriteLine("restored {0:0,0} bytes (read {1:0,0} bytes); took read={2} ms decrypt={3} ms extract={4} ms",
             bo, bi,
-            SBCLab.LXR.RestoreCtrl.time_read ctrl, SBCLab.LXR.RestoreCtrl.time_decrypt ctrl, SBCLab.LXR.RestoreCtrl.time_extract ctrl)
+            eLyKseeR.RestoreCtrl.time_read ctrl, eLyKseeR.RestoreCtrl.time_decrypt ctrl, eLyKseeR.RestoreCtrl.time_extract ctrl)
         Console.Write("compression rate: ")
         gocyan(); Console.Write("{0:0.00}", (double(bo) / double(bi)))
         gonormal(); Console.Write("  time: ")
