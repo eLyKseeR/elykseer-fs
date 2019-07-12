@@ -54,7 +54,7 @@ let ``backup and restore some file``() =
 #if compile_for_windows
     let fnames = [@"C:\Windows\notepad.exe"; @"C:\Windows\regedit.exe"]
 #else
-    let fnames = ["/usr/bin/gdb"; "/usr/bin/clang"]
+    let fnames = ["/usr/bin/gdb"; "/usr/bin/ssh"]
 #endif
     let sha256 = List.map (fun fn -> Sha256.hash_file fn |> Key256.toHex) fnames
     let mutable fsizes = 0;
