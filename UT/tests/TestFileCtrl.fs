@@ -67,7 +67,7 @@ let ``file date``() =
 #if compile_for_windows
     Assert.AreEqual(fd, "20090714 03:39:29")
 #else
-    Assert.AreEqual(fd, "20160217 21:25:57")
+    Assert.AreEqual(fd, "20190114 11:37:31")
 #endif
 
 [<Test>]
@@ -81,7 +81,7 @@ let ``file size``() =
 #if compile_for_windows
     Assert.AreEqual(427008, fs)
 #else
-    Assert.AreEqual(154072, fs)
+    Assert.AreEqual(125560, fs)
 #endif
 
 [<Test>]
