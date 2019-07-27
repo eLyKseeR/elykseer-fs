@@ -84,7 +84,7 @@ let ``backup another file with compression and watch timing``() =
 #if compile_for_windows
     let fnames = [@"C:\Windows\notepad.exe"; @"C:\Windows\regedit.exe"]
 #else
-    let fnames = ["/bin/more"; "/bin/sh"]
+    let fnames = ["/usr/bin/zip"; "/bin/sh"]
 #endif
     let mutable fsizes = 0;
 
@@ -125,7 +125,7 @@ let ``backup a file twice and watch deduplication at level 1``() =
 #if compile_for_windows
     let fnames = [@"C:\Windows\notepad.exe"; @"C:\Windows\regedit.exe"]
 #else
-    let fnames = ["/bin/more"; "/bin/sh"]
+    let fnames = ["/usr/bin/zip"; "/bin/sh"]
 #endif
     let b1 = BackupCtrl.create o1
     try
@@ -152,7 +152,7 @@ let ``backup a file twice and watch deduplication at level 1``() =
 #if compile_for_windows
     for fname in [@"C:\Windows\notepad.exe"; @"C:\Windows\SysWOW64\compmgmt.msc"; @"C:\Windows\regedit.exe"] do
 #else
-    for fname in ["/bin/more"; "/bin/more"; "/bin/sh"] do
+    for fname in ["/usr/bin/zip"; "/usr/bin/zip"; "/bin/sh"] do
 #endif
         BackupCtrl.backup b2 fname
     BackupCtrl.finalize b2
@@ -198,8 +198,12 @@ let ``backup some file which does not fit into a single assembly``() =
     let mutable fsize = 0L
 #if compile_for_windows
     for fname in [@"C:\Windows\explorer.exe"; @"C:\Windows\SysWOW64\compmgmt.msc"; @"C:\Windows\regedit.exe"] do
-#else
+#endif
+#if compile_for_linux
     for fname in ["/usr/bin/gdb";"/usr/bin/cmake";"/usr/bin/ssh"] do
+#endif
+#if compile_for_osx
+    for fname in ["/usr/bin/zip";"/usr/bin/host";"/usr/bin/ssh"] do
 #endif
         fsize <- fsize + FileCtrl.fileSize fname
         BackupCtrl.backup b1 fname
@@ -238,7 +242,7 @@ let ``backup a file twice and watch deduplication at level 2``() =
     #if compile_for_windows
         for fname in [@"C:\Windows\explorer.exe"; @"C:\Windows\regedit.exe"] do
     #else
-        for fname in ["/bin/more"; "/bin/sh"] do
+        for fname in ["/usr/bin/zip"; "/bin/sh"] do
     #endif
             BackupCtrl.backup b1 fname
         BackupCtrl.finalize b1
@@ -260,7 +264,7 @@ let ``backup a file twice and watch deduplication at level 2``() =
 #if compile_for_windows
     for fname in [@"C:\Windows\explorer.exe"; @"C:\Windows\write.exe"; @"C:\Windows\regedit.exe"] do
 #else
-    for fname in ["/bin/more"; "/bin/more"; "/bin/sh"] do
+    for fname in ["/usr/bin/zip"; "/usr/bin/zip"; "/bin/sh"] do
 #endif
         BackupCtrl.backup b2 fname
     BackupCtrl.finalize b2
@@ -307,7 +311,7 @@ let ``backup a file twice, append to it, and watch deduplication at level 2``() 
 #if compile_for_windows
     let qfname = @"C:\Windows\notepad.exe"
 #else
-    let qfname = "/bin/more"
+    let qfname = "/usr/bin/zip"
 #endif
 
     (* create random file *)
