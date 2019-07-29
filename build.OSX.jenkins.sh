@@ -6,6 +6,7 @@ PLATFRM="Any CPU"
 
 nuget restore -PackagesDirectory packages packages.config
 nuget restore -PackagesDirectory packages UT/packages.config
+nuget restore -PackagesDirectory packages gui/packages.OSX.config
 
 sn -k base/eLyKseeR.snk
 sn -k native/eLyKseeR-native.snk

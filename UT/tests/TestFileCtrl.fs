@@ -66,8 +66,12 @@ let ``file date``() =
     let fd = FileCtrl.fileDate(fname) in
 #if compile_for_windows
     Assert.AreEqual(fd, "20090714 03:39:29")
-#else
+#endif
+#if compile_for_linux
     Assert.AreEqual(fd, "20190114 11:37:31")
+#endif
+#if compile_for_osx
+    Assert.AreEqual(fd, "20190504 09:05:03")
 #endif
 
 [<Test>]
@@ -80,8 +84,12 @@ let ``file size``() =
     let fs = FileCtrl.fileSize(fname) in
 #if compile_for_windows
     Assert.AreEqual(427008, fs)
-#else
+#endif
+#if compile_for_linux
     Assert.AreEqual(125560, fs)
+#endif
+#if compile_for_osx
+    Assert.AreEqual(618480, fs)
 #endif
 
 [<Test>]

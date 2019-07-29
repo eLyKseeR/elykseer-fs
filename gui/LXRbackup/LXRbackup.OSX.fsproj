@@ -42,20 +42,20 @@
     <Reference Include="sharpPRNG">
       <HintPath>..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
-    <Reference Include="Xwt.Gtk.Mac">
-      <HintPath>..\..\..\xwt_development\Xwt.Gtk.Mac\bin\Debug\Xwt.Gtk.Mac.dll</HintPath>
-    </Reference>
-    <Reference Include="Xwt.Gtk">
-      <HintPath>..\..\..\xwt_development\Xwt.Gtk.Mac\bin\Debug\Xwt.Gtk.dll</HintPath>
+    <Reference Include="Xamarin.Mac">
+      <HintPath>..\Xamarin.Mac.dll</HintPath>
     </Reference>
     <Reference Include="Xwt">
-      <HintPath>..\..\..\xwt_development\Xwt.Gtk.Mac\bin\Debug\Xwt.dll</HintPath>
+      <HintPath>..\..\packages\Xwt.0.2.178\lib\net40\Xwt.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Mac">
-      <HintPath>..\..\..\xwt_development\Xwt.Gtk.Mac\bin\Debug\Xamarin.Mac.dll</HintPath>
+    <Reference Include="Xwt.Gtk">
+      <HintPath>..\..\packages\Xwt.Gtk.0.2.178\lib\net40\Xwt.Gtk.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
+    <Reference Include="Xwt.Gtk.Mac">
+      <HintPath>..\..\packages\Xwt.Gtk.Mac.0.2.178\lib\net40\Xwt.Gtk.Mac.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.XamMac">
+      <HintPath>..\..\packages\Xwt.XamMac.0.2.178\lib\net40\Xwt.XamMac.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
