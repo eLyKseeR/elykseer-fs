@@ -36,10 +36,10 @@
       <HintPath>..\base\packages\Unquote.4.0.0\lib\net45\Unquote.dll</HintPath>
     </Reference>
     <Reference Include="ManagedOpenSsl">
-      <HintPath>../../openssl-net_development/bin/Debug/ManagedOpenSsl.dll</HintPath>
+      <HintPath>../ext/openssl-net.git/bin/Debug/ManagedOpenSsl.dll</HintPath>
     </Reference>
     <Reference Include="sharpPRNG">
-      <HintPath>../../sharpPRNG_development/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll</HintPath>
+      <HintPath>../ext/prngsharp.git/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core, Version=2.6.4.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <Package>nunit</Package>
@@ -88,11 +88,11 @@
     <Compile Include="tests/TestLogging.fs">
       <Link>TestLogging.fs</Link>
     </Compile>
-    <None Include="../../sharpPRNG_development/libprngCpp.linux.1.0.4.so">
-      <Link>libprngCpp.linux.1.0.4.so</Link>
+    <None Include="../ext/prngsharp.git/libprngCpp.linux.1.0.5.so">
+      <Link>libprngCpp.linux.1.0.5.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="../../sharpPRNG_development/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll.config">
+    <None Include="../ext/prngsharp.git/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll.config">
       <Link>sharpPRNG.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

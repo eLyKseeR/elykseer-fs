@@ -30,7 +30,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="ManagedOpenSsl">
-      <HintPath>..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll</HintPath>
+      <HintPath>..\..\ext\openssl-net.git\bin\Debug\ManagedOpenSsl.dll</HintPath>
     </Reference>
     <Reference Include="eLyKseeR">
       <HintPath>..\..\base\bin\Debug\eLyKseeR.dll</HintPath>
@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="sharpPRNG">
-      <HintPath>..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
+      <HintPath>..\..\ext\prngsharp.git\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Mac">
       <HintPath>..\Xamarin.Mac.dll</HintPath>
@@ -95,39 +95,39 @@
     <Compile Include="ThisApplication.fs" />
     <Compile Include="Main.fs" />
     <None Include="packages.config" />
-    <None Include="..\..\..\openssl-net_development\bin\Debug\ManagedOpenSsl.dll.config">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\ManagedOpenSsl.dll.config">
       <Link>ManagedOpenSsl.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.linux.1.0.2.so">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\libcrypto.linux.1.0.2.so">
       <Link>libcrypto.linux.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.linux.1.0.2.so">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\libssl.linux.1.0.2.so">
       <Link>libssl.linux.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.freebsd.1.0.2.so">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\libcrypto.freebsd.1.0.2.so">
       <Link>libcrypto.freebsd.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.freebsd.1.0.2.so">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\libssl.freebsd.1.0.2.so">
       <Link>libssl.freebsd.1.0.2.so</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\openssl-net_development\bin\Debug\libcrypto.osx.1.0.2.dylib">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\libcrypto.osx.1.0.2.dylib">
       <Link>libcrypto.osx.1.0.2.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\openssl-net_development\bin\Debug\libssl.osx.1.0.2.dylib">
+    <None Include="..\..\ext\openssl-net.git\bin\Debug\libssl.osx.1.0.2.dylib">
       <Link>libssl.osx.1.0.2.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\sharpPRNG_development\libprngCpp.osx.1.0.4.dylib">
-      <Link>libprngCpp.osx.1.0.4.dylib</Link>
+    <None Include="..\..\ext\prngsharp.git\libprngCpp.osx.1.0.5.dylib">
+      <Link>libprngCpp.osx.1.0.5.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\sharpPRNG_development\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll.config">
+    <None Include="..\..\ext\prngsharp.git\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll.config">
       <Link>sharpPRNG.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

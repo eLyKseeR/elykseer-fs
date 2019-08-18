@@ -55,7 +55,11 @@ let ``backup some file``() =
     let b1 = BackupCtrl.create o1
 #if compile_for_windows
     let fname = @"C:\Windows\regedit.exe"
-#else
+#endif
+#if compile_for_linux
+    let fname = "/bin/bash"
+    #endif
+#if compile_for_osx
     let fname = "/bin/sh"
 #endif
     let fsize = FileCtrl.fileSize fname
@@ -83,7 +87,11 @@ let ``backup another file with compression and watch timing``() =
     let b1 = BackupCtrl.create o1
 #if compile_for_windows
     let fnames = [@"C:\Windows\notepad.exe"; @"C:\Windows\regedit.exe"]
-#else
+#endif
+#if compile_for_linux
+    let fnames = ["/usr/bin/zip"; "/bin/bash"]
+#endif
+#if compile_for_osx
     let fnames = ["/usr/bin/zip"; "/bin/sh"]
 #endif
     let mutable fsizes = 0;
