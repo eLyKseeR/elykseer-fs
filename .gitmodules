@@ -1,6 +1,6 @@
 [submodule "ext/prngsharp.git"]
 	path = ext/prngsharp.git
-	url = git@github.com:CodiePP/prngsharp.git
+	url = https://github.com/CodiePP/prngsharp.git
 [submodule "ext/openssl-net.git"]
 	path = ext/openssl-net.git
-	url = git@github.com:CodiePP/openssl-net.git
+	url = https://github.com/CodiePP/openssl-net.git
