@@ -7,6 +7,14 @@ PLATFRM="Any CPU"
 nuget restore -PackagesDirectory packages packages.config
 nuget restore -PackagesDirectory packages UT/packages.config
 
+# make dependencies
+cd ext/openssl-net.git/; ./build.Linux.jenkins.sh
+cd ../..
+cd ext/prngsharp.git/; ./build.Linux.jenkins.sh
+cd ../..
+
+
+# build
 sn -k base/eLyKseeR.snk
 sn -k native/eLyKseeR-native.snk
 sn -k UT/ut.snk

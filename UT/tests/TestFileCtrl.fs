@@ -78,7 +78,11 @@ let ``file date``() =
 let ``file size``() =
 #if compile_for_windows
     let fname = @"C:\Windows\regedit.exe"
-#else
+#endif
+#if compile_for_linux
+    let fname = "/bin/bash"
+#endif
+#if compile_for_osx
     let fname = "/bin/sh"
 #endif
     let fs = FileCtrl.fileSize(fname) in
@@ -86,7 +90,7 @@ let ``file size``() =
     Assert.AreEqual(427008, fs)
 #endif
 #if compile_for_linux
-    Assert.AreEqual(125560, fs)
+    Assert.AreEqual(1166912, fs)
 #endif
 #if compile_for_osx
     Assert.AreEqual(618480, fs)

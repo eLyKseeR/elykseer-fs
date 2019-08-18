@@ -29,15 +29,17 @@ before compilation, prepare new RSA keys for signing assemblies:
 or open the [VisualStudio solution](eLyKseeR-base.Win32.sln) on Windows.
 
 
-## requirements
+## submodules
 
-### [managed OpenSSL](https://github.com/openssl-net/openssl-net)
+run `git submodule update --remote` to get the latest versions
 
-extract source code in the parent directory: ../openssl-net_development 
+### [managed OpenSSL](https://github.com/CodiePP/openssl-net)
+
+extract source code in the parent directory: ext/openssl-net.git
 and build it.
 
 ### [sharpPRNG](https://github.com/CodiePP/prngsharp)
 
-extract source code in the parent directory: ../sharpPRNG_development
+extract source code in the parent directory: ext/prngsharp.git
 and build it. Also, run `mk_Linux.sh` to create the native library. For other
 platforms call the appropriate script.

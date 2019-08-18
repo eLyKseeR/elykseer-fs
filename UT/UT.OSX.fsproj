@@ -33,10 +33,10 @@
       <HintPath>../packages/Unquote.4.0.0/lib/net45/Unquote.dll</HintPath>
     </Reference>
     <Reference Include="ManagedOpenSsl">
-      <HintPath>../../openssl-net_development/bin/Debug/ManagedOpenSsl.dll</HintPath>
+      <HintPath>../ext/openssl-net.git/bin/Debug/ManagedOpenSsl.dll</HintPath>
     </Reference>
     <Reference Include="sharpPRNG">
-      <HintPath>../../sharpPRNG_development/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll</HintPath>
+      <HintPath>../ext/prngsharp.git/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="nunit.framework">
@@ -76,8 +76,8 @@
     <Compile Include="tests/TestLogging.fs">
       <Link>TestLogging.fs</Link>
     </Compile>
-    <None Include="../../sharpPRNG_development/libprngCpp.osx.1.0.4.dylib">
-      <Link>libprngCpp.osx.1.0.4.dylib</Link>
+    <None Include="../../sharpPRNG_development/libprngCpp.osx.1.0.5.dylib">
+      <Link>libprngCpp.osx.1.0.5.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="../../sharpPRNG_development/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll.config">

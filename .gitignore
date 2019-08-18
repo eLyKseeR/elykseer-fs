@@ -13,13 +13,3 @@ GTAGS
 GRTAGS
 GPATH
 
-cpp/src/*.hpp
-cpp/src/*.cpp
-cpp/tests/*.hpp
-cpp/tests/*.cpp
-
-ext/[a-z]*
-
-src/fstar/lxr.*.fst.checked
-src/fstar/lxr.*.fst.hints
-src/fstar/lxr.*.fst.checked.lax
