@@ -4,10 +4,9 @@ mono:
   - latest
 
 solution: base/eLyKseeR-base.Linux.sln
-install:
+script:
   - nuget restore -PackagesDirectory packages packages.config
   - nuget restore -PackagesDirectory packages UT/packages.config
-script:
   - git submodule update --remote
   - cd ext/openssl-net.git/; ./build.Linux.jenkins.sh
   - cd ../..
