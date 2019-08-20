@@ -1,3 +1,5 @@
+[![CI build status](https://travis-ci.com/eLyKseeR/elykseer-fs.svg?branch=master)](https://travis-ci.com/eLyKseeR/elykseer-fs)
+
 # elykseer-fs
 
 This version of eLyKseeR builds on the PoC that was done in 2007 using F#: https://github.com/CodiePP/elykseer-base
