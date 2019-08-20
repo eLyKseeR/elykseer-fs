@@ -8,6 +8,8 @@ nuget restore -PackagesDirectory packages packages.config
 nuget restore -PackagesDirectory packages UT/packages.config
 
 # make dependencies
+git submodule update --remote
+
 cd ext/openssl-net.git/; ./build.Linux.jenkins.sh
 cd ../..
 cd ext/prngsharp.git/; ./build.Linux.jenkins.sh

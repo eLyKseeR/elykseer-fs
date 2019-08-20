@@ -192,7 +192,7 @@ let ``backup a file twice and watch deduplication at level 1``() =
         |> ignore
 
 [<Test>]
-let ``backup some file which does not fit into a single assembly``() =
+let ``backup some files which do not fit into a single assembly``() =
     let o1 = new Options()
     o1.setNchunks 16
     o1.setRedundancy 0
@@ -208,7 +208,7 @@ let ``backup some file which does not fit into a single assembly``() =
     for fname in [@"C:\Windows\explorer.exe"; @"C:\Windows\SysWOW64\compmgmt.msc"; @"C:\Windows\regedit.exe"] do
 #endif
 #if compile_for_linux
-    for fname in ["/usr/bin/gdb";"/usr/bin/cmake";"/usr/bin/ssh"] do
+    for fname in ["/usr/bin/gdb";"/usr/bin/curl";"/usr/bin/diff";"/usr/bin/ssh"] do
 #endif
 #if compile_for_osx
     for fname in ["/usr/bin/zip";"/usr/bin/host";"/usr/bin/ssh"] do
