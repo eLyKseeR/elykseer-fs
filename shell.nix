@@ -11,6 +11,7 @@ stdenv.mkDerivation rec {
         git
         mono5
         fsharp
+        #dotnet-sdk
     ];
 
     buildInputs = [

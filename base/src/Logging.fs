@@ -28,7 +28,6 @@ module Logging =
     let f_logevt = logevt.Publish
 
     let log () s =
-        //Console.WriteLine("logging ...")
         logevt.Trigger(s)
 
     let prt_console =
@@ -36,7 +35,6 @@ module Logging =
             Console.WriteLine("{0} {1}", DateTime.Now.ToString("s"(*"yyyy-MM-dd HH:mm:ss"*)), eventargs))
 
     let enable_console () =
-        //Console.WriteLine("enabling console output")
         f_logevt.AddHandler(prt_console)
 
     let disable_console () =

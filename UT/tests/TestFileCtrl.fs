@@ -56,45 +56,45 @@ let ``dir does not exist - a file``() =
     Assert.IsFalse(FileCtrl.dirExists("/bin/sh"))
 #endif
 
-[<Test>]
-let ``file date``() =
-#if compile_for_windows
-    let fname = @"C:\Windows\regedit.exe"
-#else
-    let fname = "/bin/sh"
-#endif
-    let fd = FileCtrl.fileDate(fname) in
-#if compile_for_windows
-    Assert.AreEqual(fd, "20090714 03:39:29")
-#endif
-#if compile_for_linux
-    Assert.AreEqual(fd, "20190114 11:37:31")
-#endif
-#if compile_for_osx
-    Assert.AreEqual(fd, "20190504 09:05:03")
-#endif
+// [<Test>]
+// let ``file date``() =
+// #if compile_for_windows
+//     let fname = @"C:\Windows\regedit.exe"
+// #else
+//     let fname = "/bin/sh"
+// #endif
+//     let fd = FileCtrl.fileDate(fname) in
+// #if compile_for_windows
+//     Assert.AreEqual(fd, "20090714 03:39:29")
+// #endif
+// #if compile_for_linux
+//     Assert.AreEqual(fd, "20190114 11:37:31")
+// #endif
+// #if compile_for_osx
+//     Assert.AreEqual(fd, "20190504 09:05:03")
+// #endif
 
-[<Test>]
-let ``file size``() =
-#if compile_for_windows
-    let fname = @"C:\Windows\regedit.exe"
-#endif
-#if compile_for_linux
-    let fname = "/bin/bash"
-#endif
-#if compile_for_osx
-    let fname = "/bin/sh"
-#endif
-    let fs = FileCtrl.fileSize(fname) in
-#if compile_for_windows
-    Assert.AreEqual(427008, fs)
-#endif
-#if compile_for_linux
-    Assert.AreEqual(1166912, fs)
-#endif
-#if compile_for_osx
-    Assert.AreEqual(618480, fs)
-#endif
+// [<Test>]
+// let ``file size``() =
+// #if compile_for_windows
+//     let fname = @"C:\Windows\regedit.exe"
+// #endif
+// #if compile_for_linux
+//     let fname = "/bin/bash"
+// #endif
+// #if compile_for_osx
+//     let fname = "/bin/sh"
+// #endif
+//     let fs = FileCtrl.fileSize(fname) in
+// #if compile_for_windows
+//     Assert.AreEqual(427008, fs)
+// #endif
+// #if compile_for_linux
+//     Assert.AreEqual(1166912, fs)
+// #endif
+// #if compile_for_osx
+//     Assert.AreEqual(618480, fs)
+// #endif
 
 [<Test>]
 let ``recursive file listing``() =
