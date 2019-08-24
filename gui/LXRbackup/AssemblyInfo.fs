@@ -1,4 +1,4 @@
-﻿module LXRbackup.AssemblyInfo
+module LXRbackup.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices

@@ -1,4 +1,4 @@
-﻿(*
+(*
     eLyKseeR or LXR - cryptographic data archiving software
     https://github.com/eLyKseeR/elykseer-fs
     Copyright (C) 2017-2019 Alexander Diemand
@@ -213,9 +213,9 @@ let ``backup some files which do not fit into a single assembly``() =
 #if compile_for_osx
     for fname in ["/usr/bin/zip";"/usr/bin/host";"/usr/bin/ssh"] do
 #endif
-        if FileCtrl.fileExists(fname) then
-            fsize <- fsize + FileCtrl.fileSize fname
-            BackupCtrl.backup b1 fname
+    if FileCtrl.fileExists(fname) then
+        fsize <- fsize + FileCtrl.fileSize fname
+        BackupCtrl.backup b1 fname
 
     Assert.AreEqual(fsize, BackupCtrl.bytes_in b1)
     Assert.GreaterOrEqual(fsize, BackupCtrl.bytes_out b1)

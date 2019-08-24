@@ -1,4 +1,4 @@
-﻿namespace eLyKseeR_native.Win32.AssemblyInfo
+namespace eLyKseeR_native.Win32.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
