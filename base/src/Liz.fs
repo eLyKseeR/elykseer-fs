@@ -1,4 +1,4 @@
-﻿(*
+(*
     eLyKseeR or LXR - cryptographic data archiving software
     https://github.com/eLyKseeR/elykseer-fs
     Copyright (C) 2017-2019 Alexander Diemand
@@ -35,7 +35,7 @@ module Liz =
         Text.Encoding.ASCII.GetString(Convert.FromBase64String(b64))
 
     let copyright =
-        let b64 = "Q29weXJpZ2h0IChjKSAyMDE3LTIwMTkgQWxleGFuZGVyIERpZW1hbm=="
+        let b64 = "Q29weXJpZ2h0IChjKSAyMDE3LTIwMTkgQWxleGFuZGVyIERpZW1hbmQ="
         in
         Text.Encoding.ASCII.GetString(Convert.FromBase64String(b64))
 

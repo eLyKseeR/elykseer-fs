@@ -1,4 +1,4 @@
-﻿(*
+(*
     eLyKseeR or LXR - cryptographic data archiving software
     https://github.com/eLyKseeR/elykseer-fs
     Copyright (C) 2017-2019 Alexander Diemand
