@@ -19,9 +19,9 @@ the preferred way to inspect/hack/program eLyKseeR is via [nix-shell](https://ni
 
 before compilation, prepare new RSA keys for signing assemblies:
 
-> ``sn -k base/eLyKseeR.snk``
-> ``sn -k native/eLyKseeR-native.snk``
-> ``sn -k UT/ut.snk``
+> ``sn -k base/eLyKseeR.snk``  
+> ``sn -k native/eLyKseeR-native.snk``  
+> ``sn -k UT/ut.snk``  
 
 
 ### IDE support
