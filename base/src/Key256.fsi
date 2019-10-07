@@ -23,6 +23,10 @@ module Key256 =
 
     type t
 
+    type CKey256 = lxr.SWIGTYPE_p_CKey256
+
+    val ctype : t -> CKey256
+
     val length : int
     (** length of the key in bytes *)
 

@@ -23,4 +23,4 @@ module internal AppId =
 
     val appid : string
 
-    val salt : Key256.t
+    val salt : string //Key256.t

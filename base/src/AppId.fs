@@ -27,4 +27,4 @@ module internal AppId =
     (** the salt is to select individual encryption with AES
         attention! data encrypted with one salt cannot be decrypted with another
      *)
-    let salt = Key256.fromHex "a7261fc15f4e515c024810aef0350c2a295e13057b81695f87fa03778ec57e1d"
+    let salt = "a7261fc15f4e515c024810aef0350c2a295e13057b81695f87fa03778ec57e1d"

@@ -21,26 +21,38 @@ namespace eLyKseeR
 
 module Aes =
 
-    open OpenSSL.Crypto
+    //open OpenSSL.Crypto
 
     exception BadLength
 
-    let aes_crypt b l key n d = 
-        let kbytes = Key256.bytes key
-        let abytes = Key256.bytes <| AppId.salt
+    let aes_crypt b l key n enc = 
+        //let kbytes = Key256.bytes key
+        //let abytes = Key256.bytes <| AppId.salt
         // salt is 8 bytes
-        let salt = Array.create 8 (byte 0)
-        for i = 0 to 7 do
-            salt.[i] <- abytes.[31-i]
+        //let salt = Array.create 8 (byte 0)
+        //for i = 0 to 7 do
+            //salt.[i] <- abytes.[31-i]
         // iv is 128 bits (16 bytes)
-        let iv = Array.create 16 (byte 0)
+        //let iv = Array.create 16 (byte 0)
 
-        let cc = new CipherContext(Cipher.AES_256_CBC)
-        let key = cc.BytesToKey(MessageDigest.SHA256, salt, kbytes, 1, ref iv)
-        if d then
-            cc.Encrypt(b, key, iv)
+        //let cc = new CipherContext(Cipher.AES_256_CBC)
+        //let key = cc.BytesToKey(MessageDigest.SHA256, salt, kbytes, 1, ref iv)
+        if enc then
+            //cc.Encrypt(b, key, iv)
+            let iv = lxr.Key128.fromhex_Key128(AppId.salt)
+            let AesEnc = lxr.Aes.mk_AesEncrypt(Key256.ctype key, iv)
+            let buf = System.Text.Encoding.UTF8.GetString(b)
+            let nproc = lxr.Aes.proc_AesEncrypt(AesEnc, l, buf)
+            lxr.Key128.release_Key128(iv)
+            System.Text.Encoding.UTF8.GetBytes(buf.Substring(0,nproc))
         else
-            cc.Decrypt(b, key, iv)
+            //cc.Decrypt(b, key, iv)
+            let iv = lxr.Key128.fromhex_Key128(AppId.salt)
+            let AesDec = lxr.Aes.mk_AesDecrypt(Key256.ctype key, iv)
+            let buf = System.Text.Encoding.UTF8.GetString(b)
+            let nproc = lxr.Aes.proc_AesDecrypt(AesDec, l, buf)
+            lxr.Key128.release_Key128(iv)
+            System.Text.Encoding.UTF8.GetBytes(buf.Substring(0,nproc))
 
     let encrypt (k : Key256.t) (b : byte array) = 
         let l = Array.length b in

@@ -32,18 +32,18 @@
     <Reference Include="Unquote">
       <HintPath>../packages/Unquote.4.0.0/lib/net45/Unquote.dll</HintPath>
     </Reference>
-    <Reference Include="ManagedOpenSsl">
-      <HintPath>../ext/openssl-net.git/bin/Debug/ManagedOpenSsl.dll</HintPath>
-    </Reference>
-    <Reference Include="sharpPRNG">
-      <HintPath>../ext/prngsharp.git/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="sharpPRNG">
+      <HintPath>..\ext\prngsharp\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
+    </Reference>
+    <Reference Include="elykseer-crypto-cs">
+      <HintPath>..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)/../Microsoft SDKs/F#/4.0/Framework/v4.0/Microsoft.FSharp.Targets" />
@@ -76,18 +76,22 @@
     <Compile Include="tests/TestLogging.fs">
       <Link>TestLogging.fs</Link>
     </Compile>
-    <None Include="../../sharpPRNG_development/libprngCpp.osx.1.0.5.dylib">
-      <Link>libprngCpp.osx.1.0.5.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="../../sharpPRNG_development/sharpPRNG/sharpPRNG/bin/Debug/sharpPRNG.dll.config">
-      <Link>sharpPRNG.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <ProjectReference Include="../base/eLyKseeR-base.OSX.fsproj">
       <Project>{F0AE1EB0-9463-45A4-9E38-8D8033A0B850}</Project>
       <Name>eLyKseeR-base.OSX</Name>
     </ProjectReference>
     <None Include="packages.config" />
+    <None Include="..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll.config">
+      <Link>elykseer-crypto-cs.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll">
+      <Link>elykseer-crypto-cs.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ext\elykseer-crypto\BUILD\libelykseer-crypto-cs.osx.1.0.1.dylib">
+      <Link>libelykseer-crypto-cs.osx.1.0.1.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

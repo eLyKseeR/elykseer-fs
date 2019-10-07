@@ -20,6 +20,8 @@ mono packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe UT/bin/Debug/U
 
 # NUnit test results in: TestResult.xml
 
+exit 0
+
 sn -k cli/LXRbackup/LXRbackup.snk
 sn -k cli/LXRrestore/LXRrestore.snk
 

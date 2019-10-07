@@ -23,6 +23,10 @@ module Key128 =
 
     type t
 
+    type CKey128 = lxr.SWIGTYPE_p_CKey128
+
+    val ctype : t -> CKey128
+
     val length : int
     (** length of the key in bytes *)
 

@@ -1,6 +1,6 @@
-[submodule "ext/prngsharp.git"]
-	path = ext/prngsharp.git
+[submodule "ext/prngsharp"]
+	path = ext/prngsharp
 	url = https://github.com/CodiePP/prngsharp.git
-[submodule "ext/openssl-net.git"]
-	path = ext/openssl-net.git
-	url = https://github.com/CodiePP/openssl-net.git
+[submodule "ext/elykseer-crypto"]
+	path = ext/elykseer-crypto
+	url = https://github.com/eLyKseeR/elykseer-crypto.git
