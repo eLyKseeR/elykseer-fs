@@ -1,0 +1,6 @@
+
+run single test
+===============
+
+mono ../packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe bin/Debug/UT.exe --test=TestAes
+

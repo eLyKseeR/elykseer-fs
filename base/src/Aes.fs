@@ -21,45 +21,77 @@ namespace eLyKseeR
 
 module Aes =
 
-    //open OpenSSL.Crypto
-
     exception BadLength
+    exception ProcError of string
 
-    let aes_crypt b l key n enc = 
-        //let kbytes = Key256.bytes key
-        //let abytes = Key256.bytes <| AppId.salt
-        // salt is 8 bytes
-        //let salt = Array.create 8 (byte 0)
-        //for i = 0 to 7 do
-            //salt.[i] <- abytes.[31-i]
-        // iv is 128 bits (16 bytes)
-        //let iv = Array.create 16 (byte 0)
-
-        //let cc = new CipherContext(Cipher.AES_256_CBC)
-        //let key = cc.BytesToKey(MessageDigest.SHA256, salt, kbytes, 1, ref iv)
-        if enc then
-            //cc.Encrypt(b, key, iv)
-            let iv = lxr.Key128.fromhex_Key128(AppId.salt)
-            let AesEnc = lxr.Aes.mk_AesEncrypt(Key256.ctype key, iv)
-            let buf = System.Text.Encoding.UTF8.GetString(b)
-            let nproc = lxr.Aes.proc_AesEncrypt(AesEnc, l, buf)
-            lxr.Key128.release_Key128(iv)
-            System.Text.Encoding.UTF8.GetBytes(buf.Substring(0,nproc))
+    let blockenc p (maxsz : uint32) (inbuf : byte[]) : byte[] =
+        let len = uint32(Array.length inbuf)
+        if len = uint32 0
+        then Array.empty
         else
-            //cc.Decrypt(b, key, iv)
-            let iv = lxr.Key128.fromhex_Key128(AppId.salt)
-            let AesDec = lxr.Aes.mk_AesDecrypt(Key256.ctype key, iv)
-            let buf = System.Text.Encoding.UTF8.GetString(b)
-            let nproc = lxr.Aes.proc_AesDecrypt(AesDec, l, buf)
-            lxr.Key128.release_Key128(iv)
-            System.Text.Encoding.UTF8.GetBytes(buf.Substring(0,nproc))
+            let outbuf = Array.create (int(len)) (byte 0)
+            let mutable tempb = Array.create (int(maxsz)) (byte 0)
+            let mutable outlen = uint32 0
+            let mutable count = uint32 0
+            while count < len do
+                let sz = min maxsz (len - count)
+                let c = int(count)
+                //System.Console.WriteLine(Printf.sprintf "sz = %i  count = %i" sz c)
+                System.Buffer.BlockCopy(inbuf, c, tempb, 0, int(sz))
+                let nproc = lxr.Aes.proc_AesEncrypt(p, uint32(sz), &tempb)
+                count <- count + uint32(nproc)
+                let available = lxr.Aes.len_AesEncrypt(p)
+                let copied = lxr.Aes.copy_AesEncrypt(p, maxsz, &tempb)
+                System.Buffer.BlockCopy(tempb, 0, outbuf, int(outlen), int(copied))
+                outlen <- outlen + copied
+                //System.Console.WriteLine(Printf.sprintf "nproc = %i  avail = %i  copied = %i tempb[0]='%02x' tempb[1]='%02x'"
+                                                         //nproc available copied tempb.[0] tempb.[1])
 
-    let encrypt (k : Key256.t) (b : byte array) = 
-        let l = Array.length b in
-        if l % 16 <> 0 then raise BadLength
-        else aes_crypt b l k 256 true
+            let fin = lxr.Aes.fin_AesEncrypt(p)
+            if (fin > 0)
+            then
+                let copied = lxr.Aes.copy_AesEncrypt(p, maxsz, &tempb)
+                System.Buffer.BlockCopy(tempb, 0, outbuf, int(outlen), int(copied))
+            else ()
+            outbuf
 
-    let decrypt (k : Key256.t) (b : byte array) = 
-        let l = Array.length b in
-        if l % 16 <> 0 then raise BadLength
-        else aes_crypt b l k 256 false
+    let blockdec p (maxsz : uint32) (inbuf : byte[]) : byte[] =
+        let len = uint32(Array.length inbuf)
+        let outbuf = Array.create (int(len)) (byte 0)
+        let mutable tempb = Array.create (int(maxsz)) (byte 0)
+        let mutable outlen = uint32 0
+        let mutable count = uint32 0
+        while count < len do
+            let sz = min maxsz (len - count)
+            let c = int(count)
+            let b = inbuf.[c .. c + int(sz) - 1]
+            let nproc = lxr.Aes.proc_AesDecrypt(p, uint32(sz), ref b)
+            count <- count + uint32(nproc)
+            let available = lxr.Aes.len_AesDecrypt(p)
+            let copied = lxr.Aes.copy_AesDecrypt(p, maxsz, &tempb)
+            System.Buffer.BlockCopy(tempb, 0, outbuf, int(outlen), int(copied))
+            outlen <- outlen + copied
+
+        let fin = lxr.Aes.fin_AesDecrypt(p)
+        if (fin > 0)
+        then
+            let copied = lxr.Aes.copy_AesDecrypt(p, maxsz, &tempb)
+            System.Buffer.BlockCopy(tempb, 0, outbuf, int(outlen), int(copied))
+        else ()
+        outbuf
+
+    let encrypt (key : Key256.t) (buf : byte array) : byte array =
+        let iv = lxr.Key128.fromhex_Key128(AppId.salt)
+        let aesEnc = lxr.Aes.mk_AesEncrypt(Key256.ctype key, iv)
+        let encrypted = blockenc aesEnc (lxr.Aes.sz_AesEncrypt()) buf
+        lxr.Key128.release_Key128(iv)
+        lxr.Aes.release_AesEncrypt(aesEnc)
+        encrypted
+
+    let decrypt (key : Key256.t) (buf : byte array) : byte array =
+        let iv = lxr.Key128.fromhex_Key128(AppId.salt)
+        let aesDec = lxr.Aes.mk_AesDecrypt(Key256.ctype key, iv)
+        let decrypted = blockdec aesDec (lxr.Aes.sz_AesDecrypt()) buf
+        lxr.Key128.release_Key128(iv)
+        lxr.Aes.release_AesDecrypt(aesDec)
+        decrypted

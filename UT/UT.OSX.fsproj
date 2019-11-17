@@ -43,7 +43,7 @@
       <HintPath>..\ext\prngsharp\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="elykseer-crypto-cs">
-      <HintPath>..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll</HintPath>
+      <HintPath>..\ext\elykseer-crypto\src\csharp\elykseer-crypto-cs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)/../Microsoft SDKs/F#/4.0/Framework/v4.0/Microsoft.FSharp.Targets" />
@@ -76,22 +76,26 @@
     <Compile Include="tests/TestLogging.fs">
       <Link>TestLogging.fs</Link>
     </Compile>
+    <None Include="packages.config" />
+    <None Include="..\ext\elykseer-crypto\src\csharp\elykseer-crypto-cs.dll">
+      <Link>elykseer-crypto-cs.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ext\elykseer-crypto\src\csharp\elykseer-crypto-cs.dll.config">
+      <Link>elykseer-crypto-cs.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ext\elykseer-crypto\src\csharp\libelykseer-crypto-cs.osx.1.0.1.dylib">
+      <Link>libelykseer-crypto-cs.osx.1.0.1.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\ext\elykseer-crypto\BUILD\src\libelykseer-crypto_Debug.1.0.7.dylib">
+      <Link>libelykseer-crypto_Debug.1.0.7.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <ProjectReference Include="../base/eLyKseeR-base.OSX.fsproj">
       <Project>{F0AE1EB0-9463-45A4-9E38-8D8033A0B850}</Project>
       <Name>eLyKseeR-base.OSX</Name>
     </ProjectReference>
-    <None Include="packages.config" />
-    <None Include="..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll.config">
-      <Link>elykseer-crypto-cs.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll">
-      <Link>elykseer-crypto-cs.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\ext\elykseer-crypto\BUILD\libelykseer-crypto-cs.osx.1.0.1.dylib">
-      <Link>libelykseer-crypto-cs.osx.1.0.1.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>

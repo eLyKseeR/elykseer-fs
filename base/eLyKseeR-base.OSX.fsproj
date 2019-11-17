@@ -40,7 +40,7 @@
       <HintPath>..\ext\prngsharp\sharpPRNG\sharpPRNG\bin\Debug\sharpPRNG.dll</HintPath>
     </Reference>
     <Reference Include="elykseer-crypto-cs">
-      <HintPath>..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll</HintPath>
+      <HintPath>..\ext\elykseer-crypto\src\csharp\elykseer-crypto-cs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)/../Microsoft SDKs/F#/4.0/Framework/v4.0/Microsoft.FSharp.Targets" />
@@ -191,9 +191,5 @@
     </ProjectReference>
     <None Include="../packages.config" />
     <None Include="packages.config" />
-    <None Include="..\ext\elykseer-crypto\BUILD\elykseer-crypto-cs.dll.config">
-      <Link>elykseer-crypto-cs.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 </Project>
