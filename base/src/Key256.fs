@@ -21,8 +21,11 @@ namespace eLyKseeR
 
 module Key256 =
 
-    type t = { 
-        key256 : byte array;
+    type CKey256 = lxr.SWIGTYPE_p_CKey256
+
+    type t = {
+        //key256 : byte array;
+        key256 : CKey256  // internal
     }
 
     //[<Literal>]
@@ -30,15 +33,22 @@ module Key256 =
 
     let nbytes = length / 8
 
+    let ctype k = k.key256
+
     let create () = 
-        let k = Key.create nbytes in
-        { key256 = k }
+        { key256 = lxr.Key256.mk_Key256() }
+        //let k = Key.create nbytes in
+        //{ key256 = k }
 
-    let toHex k = Key.toHex nbytes k.key256
+    let toHex k = lxr.Key256.tohex_Key256(k.key256)
+        //Key.toHex nbytes k.key256
 
-    let fromHex s = { key256 = Key.fromHex nbytes s }
+    let fromHex s =
+        { key256 = lxr.Key256.fromhex_Key256(s) }
+        //{ key256 = Key.fromHex nbytes s }
 
-    let bytes k = k.key256
+    let bytes k = lxr.Key256.tohex_Key256(k.key256) |>
+                  Key.fromHex nbytes
 
 
 (*

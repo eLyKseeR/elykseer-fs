@@ -21,8 +21,11 @@ namespace eLyKseeR
 
 module Key128 =
 
+    type CKey128 = lxr.SWIGTYPE_p_CKey128
+
     type t = { 
-        key128 : byte array;
+        //key128 : byte array;
+        key128 : CKey128  // internal
     }
 
     //[<Literal>]
@@ -30,12 +33,19 @@ module Key128 =
 
     let nbytes = length / 8
 
+    let ctype k = k.key128
+
     let create () = 
-        let k = Key.create nbytes in
-        { key128 = k }
+        { key128 = lxr.Key128.mk_Key128() }
+        //let k = Key.create nbytes in
+        //{ key128 = k }
 
-    let toHex k = Key.toHex nbytes k.key128
+    let toHex k = lxr.Key128.tohex_Key128(k.key128)
+        //Key.toHex nbytes k.key128
 
-    let fromHex s = { key128 = Key.fromHex nbytes s }
+    let fromHex s = 
+        { key128 = lxr.Key128.fromhex_Key128(s) }
+        //{ key128 = Key.fromHex nbytes s }
 
-    let bytes k = k.key128
+    let bytes k = lxr.Key128.tohex_Key128(k.key128) |>
+                  Key.fromHex nbytes

@@ -19,6 +19,7 @@
 
 module TestAes
 
+open System
 open NUnit.Framework
 open eLyKseeR
 
@@ -26,45 +27,56 @@ open eLyKseeR
 let ``can encrypt and decrypt``() =
     let k = Key256.create ()
     let smsg = "this is a message to be en/decrypted and compared"
-    let msg = Array.create 256 (byte 0)
-    for i = 0 to (String.length smsg - 1) do
-        msg.[i] <- byte smsg.[i]
+    let msg = Array.create (String.length smsg) (byte 0)
+    String.iteri (fun i c -> msg.[i] <- byte(c)) smsg
 
     printf "\noriginal plaintext: \n"
     Array.iter (fun b -> printf "%02x " b) msg
+    printf "\n"
 
     let msg2 = Aes.encrypt k msg
     printf "\nencrypted:  \n"
     Array.iter (fun b -> printf "%02x " b) msg2
+    printf "\n"
 
     let msg3 = Aes.decrypt k msg2
     printf "\ndecrypted:  \n"
     Array.iter (fun b -> printf "%02x " b) msg3
+    printf "\n"
+    Assert.AreEqual(msg, msg3)
+    Assert.AreEqual(smsg, msg3.[0 .. String.length smsg - 1])
+
+    let msg4 = Aes.encrypt k msg3
+    let msg5 = Aes.decrypt k msg4
+    Assert.AreEqual(msg, msg5)
 
 [<Test>]
 let ``huge buffer: encrypt and decrypt``() =
     let k = Key256.create ()
-    //let smsg = "0123456789"
-    let smsg = Key256.create() |> Key256.toHex
-    let sz = 16*Chunk.width*Chunk.height
+    let smsg = "0123456789"
+    let sz = 16*Chunk.width*Chunk.height // 4 MB
     let msg = Array.create sz (byte 0)
-    let mutable idx = 0
-    while idx < sz do
-        for i = 0 to (String.length smsg - 1) do
-            if (idx+i) < sz then
-                msg.[idx+i] <- byte smsg.[i]
-        idx <- idx + 10
 
-    printfn "\noriginal plaintext: "
-    //Array.iter (fun b -> printf "%02x " b) msg
+    let mutable tenc = Array.create 100 (int 0)
+    let mutable tdec = Array.create 100 (int 0)
 
-    let msg2 = Aes.encrypt k msg
-    Assert.LessOrEqual(msg.Length, msg2.Length)
-    Assert.AreEqual(16, msg2.Length - msg.Length)
-    printfn "\nencrypted: %d" msg2.Length
-    //Array.iter (fun b -> printf "%02x " b) msg2
+    for i in 1 .. 100 do
+        let t0 = DateTime.Now
+        let msg2 = Aes.encrypt k msg
+        Assert.AreEqual(msg.Length, msg2.Length)
 
-    let msg3 = Aes.decrypt k msg2
-    Assert.AreEqual(msg.Length, msg3.Length)
-    printfn "\ndecrypted:  %d" msg3.Length
-    //Array.iter (fun b -> printf "%02x " b) msg3
+        let t1 = DateTime.Now
+        let msg3 = Aes.decrypt k msg2
+        let t2 = DateTime.Now
+        tenc.[i-1] <- (t1 - t0).Milliseconds
+        tdec.[i-1] <- (t2 - t1).Milliseconds
+
+        Assert.AreEqual(msg.Length, msg3.Length)
+        Assert.AreEqual(msg, msg3)
+
+    //System.Console.WriteLine("time for encryption: {0} ms", (t1 - t0).Milliseconds)
+    //System.Console.WriteLine("time for decryption: {0} ms", (t2 - t1).Milliseconds)
+    System.Array.Sort(tenc)
+    System.Array.Sort(tdec)
+    System.Console.WriteLine("time for encryption: {0} < {1} < {2}", tenc.[0], tenc.[50], tenc.[99])
+    System.Console.WriteLine("time for decryption: {0} < {1} < {2}", tdec.[0], tdec.[50], tdec.[99])

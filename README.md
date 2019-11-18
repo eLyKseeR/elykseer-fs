@@ -45,3 +45,8 @@ and build it.
 extract source code in the parent directory: ext/prngsharp.git
 and build it. Also, run `mk_Linux.sh` to create the native library. For other
 platforms call the appropriate script.
+
+## Testing specific unit test
+
+> ``mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe --test=TestAes UT/bin/Debug/UT.exe``
+

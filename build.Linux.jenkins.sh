@@ -6,15 +6,15 @@ PLATFRM="Any CPU"
 
 nuget restore -PackagesDirectory packages packages.config
 nuget restore -PackagesDirectory packages UT/packages.config
+nuget restore -PackagesDirectory packages gui/packages.OSX.config
 
 # make dependencies
 git submodule update --remote
 
-cd ext/openssl-net.git/; ./build.Linux.jenkins.sh
+cd ext/elykseer-crypto; ./build.Linux.jenkins.sh
 cd ../..
-cd ext/prngsharp.git/; ./build.Linux.jenkins.sh
+cd ext/prngsharp; ./build.Linux.jenkins.sh
 cd ../..
-
 
 # build
 sn -k base/eLyKseeR.snk
@@ -27,6 +27,8 @@ xbuild /p:Configuration="Debug" /p:Platform="${PLATFRM}" base/eLyKseeR-base.Linu
 mono packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe UT/bin/Debug/UT.exe
 
 # NUnit test results in: TestResult.xml
+
+exit 0
 
 sn -k cli/LXRbackup/LXRbackup.snk
 sn -k cli/LXRrestore/LXRrestore.snk
